@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="ext-resource-dependency" content="art/match.jpg" data-resource-id="match" />
+<meta name="ext-resource-dependency" content="art/fish.jpg" data-resource-id="fish" />
+<meta name="ext-resource-dependency" content="art/brain.jpg" data-resource-id="brain" />
+<meta name="ext-resource-dependency" content="art/smoke.jpg" data-resource-id="smoke" />
+<meta name="ext-resource-dependency" content="art/stars.jpg" data-resource-id="stars" />
+<meta name="ext-resource-dependency" content="art/cyclist.jpg" data-resource-id="cyclist" />
+<meta name="ext-resource-dependency" content="art/cat.jpg" data-resource-id="cat" />
+<meta name="ext-resource-dependency" content="art/lemon.jpg" data-resource-id="lemon" />
+<meta name="ext-resource-dependency" content="art/comic.jpg" data-resource-id="comic" />
+<meta name="ext-resource-dependency" content="art/house.gif" data-resource-id="house" />
+<meta name="ext-resource-dependency" content="art/reel.mp4" data-resource-id="reel" />
+<meta name="ext-resource-dependency" content="art/loop2.mp4" data-resource-id="loop2" />
+<meta name="ext-resource-dependency" content="art/comic-p1.jpg" data-resource-id="comicp1" />
+<meta name="ext-resource-dependency" content="art/comic-p2.jpg" data-resource-id="comicp2" />
+<meta name="ext-resource-dependency" content="art/comic-p3.jpg" data-resource-id="comicp3" />
+<meta name="ext-resource-dependency" content="art/comic-p4.jpg" data-resource-id="comicp4" />
+<meta name="ext-resource-dependency" content="art/wp1.jpg" data-resource-id="wp1" />
+<meta name="ext-resource-dependency" content="art/wp2.jpg" data-resource-id="wp2" />
+<meta name="ext-resource-dependency" content="art/wp3.jpg" data-resource-id="wp3" />
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" data-bg-color="#2a2723">
+  <rect width="400" height="400" fill="#2a2723"/>
+  <circle cx="200" cy="200" r="86" fill="#41705f"/>
+  <text x="200" y="232" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="112" fill="#2a2723">T</text>
+</svg>
+</template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#f6f1e7;}
+*{box-sizing:border-box;}
+::selection{background:#41705f;color:#f6f1e7;}
+a{color:#41705f;text-decoration:none;}
+a:hover{color:#2a2723;}
+[data-reveal]{transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1);}
+@keyframes theroSink{to{transform:scale(.9) translateY(-40px);opacity:.65}}
+@keyframes tmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes tspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes tbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes tblink{0%,92%,100%{opacity:1}94%,98%{opacity:.15}}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#2a2723}
+::-webkit-scrollbar-thumb{background:#41705f}
+#heroInner{animation:theroSink linear both;animation-timeline:scroll(root);animation-range:0 100vh;}
+</style>
+<script src="tortilla-scroll.js"></script>
+
+</helmet>
+
+<div style="background:#f6f1e7;color:#2a2723;font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;position:relative;overflow-x:hidden;">
+
+<div style="position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.055;mix-blend-mode:overlay;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><filter id=%22n%22><feTurbulence baseFrequency=%22.85%22 numOctaves=%223%22/></filter><rect width=%22120%22 height=%22120%22 filter=%22url(%23n)%22/></svg>');"></div>
+
+<header style="position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:30px;padding:9px 12px 9px 20px;border-radius:100px;background:#41705f;border:1px solid rgba(246,241,231,.24);box-shadow:0 10px 30px rgba(42,39,35,.22);max-width:calc(100% - 28px);">
+  <div onClick="{{ goHome }}" style="font-family:Anton,sans-serif;font-size:19px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;color:#f6f1e7;white-space:nowrap;">Tortilla<span style="color:#b9d3c7;">°</span></div>
+  <nav style="display:flex;gap:4px;align-items:center;">
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+      <a href="{{ n.href }}" style="display:flex;gap:7px;align-items:baseline;padding:8px 13px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#f6f1e7;transition:background .25s,color .25s;white-space:nowrap;" style-hover="background:#f6f1e7;color:#2a2723;">
+        <span style="opacity:.5;font-size:9px;">{{ n.num }}</span>
+        <span>{{ n.label }}</span>
+      </a>
+    </sc-for>
+  </nav>
+</header>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main>
+
+  <section id="hero" style="height:100vh;min-height:660px;position:sticky;top:0;z-index:0;overflow:hidden;">
+    <div id="heroInner" style="position:absolute;inset:0;display:flex;will-change:transform,opacity;">
+    <sc-for list="{{ panels }}" as="p" hint-placeholder-count="5">
+      <div onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" onClick="{{ p.open }}" style="{{ p.style }}">
+        <img src="{{ p.src }}" alt="" style="{{ p.imgStyle }}"/>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,26,28,.55) 0%,rgba(23,26,28,.05) 40%,rgba(23,26,28,.8) 100%);"></div>
+        <div style="position:absolute;left:0;right:0;bottom:26px;display:flex;flex-direction:column;align-items:center;gap:2px;">
+          <div style="font-family:Anton,sans-serif;font-size:clamp(26px,3.1vw,52px);line-height:.86;letter-spacing:.01em;color:#e8e6e0;text-shadow:0 4px 24px rgba(0,0,0,.6);">{{ p.a }}</div>
+          <div style="font-family:Anton,sans-serif;font-size:clamp(26px,3.1vw,52px);line-height:.86;color:#8fb0a5;text-shadow:0 4px 24px rgba(0,0,0,.6);">{{ p.b }}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:#f6f1e7;opacity:.9;margin-top:10px;text-shadow:0 2px 10px rgba(0,0,0,.85);">{{ p.kind }}</div>
+        </div>
+      </div>
+    </sc-for>
+    </div>
+  </section>
+
+  <div style="position:relative;z-index:2;background:#f6f1e7;border-radius:26px 26px 0 0;box-shadow:0 -30px 80px rgba(0,0,0,.75);overflow:hidden;">
+
+  <div style="overflow:hidden;background:#41705f;color:#f6f1e7;padding:12px 0;border-top:2px solid #2a2723;">
+    <div style="display:flex;width:max-content;animation:tmarq 26s linear infinite;">
+      <div style="display:flex;gap:44px;padding-right:44px;font-family:Anton,sans-serif;font-size:46px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;">
+        <span>2D Animation</span><span style="opacity:.45;">✦</span><span>Character Design</span><span style="opacity:.45;">✦</span><span>Illustration</span><span style="opacity:.45;">✦</span><span>Frame by Frame</span><span style="opacity:.45;">✦</span>
+      </div>
+      <div style="display:flex;gap:44px;padding-right:44px;font-family:Anton,sans-serif;font-size:46px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;">
+        <span>2D Animation</span><span style="opacity:.45;">✦</span><span>Character Design</span><span style="opacity:.45;">✦</span><span>Illustration</span><span style="opacity:.45;">✦</span><span>Frame by Frame</span><span style="opacity:.45;">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <section id="about" style="padding:120px 28px 110px;display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:start;max-width:1500px;margin:0 auto;">
+    <div>
+      <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;margin-bottom:28px;">01 / ABOUT</div>
+      <h2 data-reveal style="font-family:Anton,sans-serif;font-weight:400;font-size:clamp(38px,4.4vw,74px);line-height:1.02;margin:0 0 30px;text-wrap:balance;">Hi, I'm Tortilla — a 2D animator and digital artist making characters that refuse to sit still.</h2>
+      <p style="font-size:17px;line-height:1.65;max-width:56ch;opacity:.78;margin:0 0 18px;text-wrap:pretty;">I draw people, animals and the odd sentient matchstick. Most of my work starts as a scribble in a sketchbook and ends as a loop — hand-drawn frame by frame, coloured loud, animated with a bit of a swagger.</p>
+      <p style="font-size:17px;line-height:1.65;max-width:56ch;opacity:.78;margin:0 0 34px;text-wrap:pretty;">Commissions, character sheets, promo loops, comics. If it moves and it has a face, I want to draw it.</p>
+      <a href="#contact" style="display:inline-flex;align-items:center;gap:10px;background:#41705f;color:#f6f1e7;font-family:Anton,sans-serif;font-size:16px;letter-spacing:.06em;text-transform:uppercase;padding:15px 26px;border-radius:100px;" style-hover="background:#f6f1e7;color:#2a2723;">Get in touch <span>→</span></a>
+    </div>
+    <div data-reveal style="position:relative;">
+      <img src="art/comic.jpg" alt="" style="width:100%;border-radius:4px;display:block;"/>
+      <div style="position:absolute;top:-26px;right:-14px;width:104px;height:104px;border-radius:50%;background:#41705f;border:1px solid rgba(246,241,231,.3);display:flex;align-items:center;justify-content:center;animation:tbob 5s ease-in-out infinite;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;line-height:1.5;letter-spacing:.14em;text-align:center;color:#f6f1e7;">OPEN<br/>FOR<br/>WORK</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works" style="padding:0 28px 40px;max-width:1500px;margin:0 auto;position:relative;" onMouseMove="{{ trackCursor }}">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(246,241,231,.16);padding-bottom:16px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;">02 / SELECTED WORKS</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;opacity:.4;">2021 — 2026</div>
+    </div>
+    <div data-reveal>
+    <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
+      <div onMouseEnter="{{ w.enter }}" onMouseLeave="{{ w.leave }}" onClick="{{ w.open }}" style="{{ w.rowStyle }}">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.45;width:38px;flex:none;">{{ w.num }}</div>
+        <div style="font-family:Anton,sans-serif;font-size:clamp(34px,5vw,78px);line-height:1;text-transform:uppercase;flex:1;">{{ w.title }}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.55;text-align:right;width:200px;flex:none;">{{ w.meta }}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:14px;opacity:.5;width:26px;text-align:right;flex:none;">↗</div>
+      </div>
+    </sc-for>
+    </div>
+    <div style="{{ floatStyle }}">
+      <sc-for list="{{ floats }}" as="f" hint-placeholder-count="1">
+        <img src="{{ f.src }}" alt="" style="{{ f.style }}"/>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="process" style="padding:110px 28px;max-width:1500px;margin:0 auto;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;margin-bottom:36px;">03 / PROCESS</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(246,241,231,.16);border:1px solid rgba(246,241,231,.16);">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div data-reveal style="background:#f6f1e7;padding:34px 26px 40px;min-height:280px;display:flex;flex-direction:column;gap:14px;" style-hover="background:#ece4d6;">
+          <div style="font-family:Anton,sans-serif;font-size:52px;line-height:1;color:#41705f;opacity:.85;">{{ s.num }}</div>
+          <div style="font-family:Anton,sans-serif;font-size:24px;text-transform:uppercase;letter-spacing:.02em;">{{ s.title }}</div>
+          <p style="font-size:14.5px;line-height:1.6;opacity:.65;margin:0;text-wrap:pretty;">{{ s.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="reel" style="padding:0 28px 110px;max-width:1500px;margin:0 auto;">
+    <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px;flex-wrap:wrap;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;">04 / REEL</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.45;">{{ featuredMeta }}</div>
+    </div>
+    <div data-reveal onClick="{{ toggleReel }}" onMouseEnter="{{ reelHoverOn }}" onMouseLeave="{{ reelHoverOff }}" style="{{ featuredFrame }}">
+      <sc-if value="{{ featuredIsVideo }}" hint-placeholder-val="{{ true }}">
+        <video src="{{ featuredSrc }}" autoplay loop muted="{{ true }}" playsinline onLoadedMetadata="{{ featuredMeta_ }}" onVolumeChange="{{ forceMute }}" onEnded="{{ replay }}" onPlay="{{ syncReel }}" onPause="{{ syncReel }}" onCanPlay="{{ syncReel }}" style="height:100%;width:auto;max-width:100%;object-fit:contain;"></video>
+      </sc-if>
+      <sc-if value="{{ featuredIsImage }}" hint-placeholder-val="{{ false }}">
+        <img src="{{ featuredSrc }}" alt="" style="height:100%;width:auto;max-width:100%;object-fit:contain;"/>
+      </sc-if>
+      <div style="position:absolute;left:18px;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#f6f1e7;opacity:.85;text-shadow:0 1px 8px rgba(0,0,0,.6);">{{ featuredFile }}</div>
+      <div style="position:absolute;right:18px;bottom:16px;display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:100px;background:rgba(42,39,35,.72);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#f6f1e7;">
+        <span>{{ reelBtnLabel }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="loops" style="padding:0 28px 110px;max-width:1500px;margin:0 auto;">
+    <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:26px;flex-wrap:wrap;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;">05 / LOOPS</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.45;">CLICK ANY LOOP TO PLAY IT IN THE REEL ABOVE</div>
+    </div>
+    <div data-reveal style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:18px;">
+      <sc-for list="{{ loops }}" as="l" hint-placeholder-count="4">
+        <figure onClick="{{ l.select }}" onMouseEnter="{{ l.enter }}" onMouseLeave="{{ l.leave }}" style="{{ l.figStyle }}">
+          <div style="{{ l.frameStyle }}">
+            <sc-if value="{{ l.isVideo }}" hint-placeholder-val="{{ true }}">
+              <video src="{{ l.src }}" loop muted="{{ true }}" playsinline preload="metadata" onLoadedMetadata="{{ l.onMeta }}" onVolumeChange="{{ forceMute }}" onEnded="{{ replay }}" onMouseEnter="{{ hoverPlay }}" onMouseLeave="{{ hoverStop }}" style="height:100%;width:100%;object-fit:contain;"></video>
+            </sc-if>
+            <sc-if value="{{ l.isImage }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ l.shownSrc }}" alt="" onLoad="{{ l.onMeta }}" style="height:100%;width:100%;object-fit:contain;"/>
+            </sc-if>
+            <div style="{{ l.badgeStyle }}">{{ l.badge }}</div>
+          </div>
+          <figcaption style="display:flex;flex-direction:column;gap:3px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;opacity:.55;">
+            <span>{{ l.file }}</span><span>{{ l.note }}</span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid rgba(246,241,231,.16);border-bottom:1px solid rgba(246,241,231,.16);overflow:hidden;padding:26px 0;">
+    <div style="display:flex;width:max-content;animation:tmarq 34s linear infinite;">
+      <div style="display:flex;gap:56px;padding-right:56px;align-items:center;font-family:Anton,sans-serif;font-size:30px;text-transform:uppercase;letter-spacing:.04em;opacity:.42;white-space:nowrap;">
+        <span>Huion</span><span>Clip Studio</span><span>Callipeg</span><span>Procreate</span><span>Adobe</span><span>Wacom</span>
+      </div>
+      <div style="display:flex;gap:56px;padding-right:56px;align-items:center;font-family:Anton,sans-serif;font-size:30px;text-transform:uppercase;letter-spacing:.04em;opacity:.42;white-space:nowrap;">
+        <span>Huion</span><span>Clip Studio</span><span>Callipeg</span><span>Procreate</span><span>Adobe</span><span>Wacom</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding:120px 28px 70px;max-width:1500px;margin:0 auto;text-align:center;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;margin-bottom:26px;">06 / CONTACT</div>
+    <a data-reveal href="mailto:hello@tortilla.art" style="display:block;font-family:Anton,sans-serif;font-size:clamp(52px,11vw,168px);line-height:.92;text-transform:uppercase;color:#2a2723;" style-hover="color:#41705f;">Let's make<br/>it move</a>
+    <div style="display:flex;gap:30px;justify-content:center;margin-top:44px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;">
+      <a href="mailto:hello@tortilla.art">HELLO@TORTILLA.ART</a>
+      <a href="#">INSTAGRAM</a>
+      <a href="#">BEHANCE</a>
+      <a href="#">TUMBLR</a>
+    </div>
+    <div style="margin-top:70px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;opacity:.35;">©2026 TORTILLA — ALL DRAWINGS MINE</div>
+  </section>
+
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+<main style="padding-top:78px;">
+  <div style="padding:0 28px;max-width:1500px;margin:0 auto;">
+    <div onClick="{{ goHome }}" style="display:inline-flex;gap:9px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;opacity:.6;cursor:pointer;margin-bottom:34px;">← BACK TO INDEX</div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;border-bottom:1px solid rgba(246,241,231,.16);padding-bottom:26px;">
+      <h1 style="font-family:Anton,sans-serif;font-weight:400;font-size:clamp(48px,9vw,150px);line-height:.9;margin:0;text-transform:uppercase;">{{ current.title }}</h1>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;opacity:.6;text-align:right;line-height:2;">{{ current.meta }}<br/>{{ current.tools }}</div>
+    </div>
+  </div>
+
+  <div style="padding:44px 28px 0;max-width:1500px;margin:0 auto;">
+    <img src="{{ current.src }}" alt="" style="{{ heroImgStyle }}"/>
+  </div>
+
+  <div style="padding:64px 28px;max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:70px;">
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;margin-bottom:20px;">THE BRIEF</div>
+      <p style="font-size:17px;line-height:1.65;opacity:.78;margin:0 0 16px;text-wrap:pretty;">{{ current.brief }}</p>
+      <p style="font-size:17px;line-height:1.65;opacity:.78;margin:0;text-wrap:pretty;">Rough pass first, then clean line, flats, and a shading pass. The loop runs on twos so the movement keeps a bit of grit.</p>
+    </div>
+    <sc-if value="{{ noPages }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-content:start;">
+      <sc-for list="{{ frames }}" as="f" hint-placeholder-count="6">
+        <div style="position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:3px;background:#ece4d6;">
+          <img src="{{ f.src }}" alt="" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);opacity:.55;" style-hover="filter:none;opacity:1;"/>
+          <div style="position:absolute;left:8px;top:8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.7;">{{ f.label }}</div>
+        </div>
+      </sc-for>
+    </div>
+    </sc-if>
+    <sc-if value="{{ hasPages }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:14px;align-self:start;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;color:#41705f;">{{ pagesTitle }}</div>
+      <p style="font-size:15px;line-height:1.6;opacity:.6;margin:0;text-wrap:pretty;">{{ pagesNote }}</p>
+    </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ hasPages }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:0 28px 80px;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:18px;">
+    <sc-for list="{{ pages }}" as="p" hint-placeholder-count="4">
+      <figure style="{{ p.style }}">
+        <img src="{{ p.src }}" alt="" style="width:100%;display:block;border-radius:4px;background:#e6dccb;"/>
+        <figcaption style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;opacity:.4;">{{ p.label }}</figcaption>
+      </figure>
+    </sc-for>
+  </div>
+  </sc-if>
+
+  <div onClick="{{ nextWork }}" style="border-top:1px solid rgba(246,241,231,.16);padding:70px 28px;text-align:center;cursor:pointer;" style-hover="background:#ece4d6;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;opacity:.5;margin-bottom:14px;">NEXT PROJECT</div>
+    <div style="font-family:Anton,sans-serif;font-size:clamp(40px,7vw,110px);line-height:.95;text-transform:uppercase;color:#41705f;">{{ nextTitle }}</div>
+  </div>
+</main>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+const ASSETS = {"match":"art/match.jpg","fish":"art/fish.jpg","brain":"art/brain.jpg","smoke":"art/smoke.jpg","stars":"art/stars.jpg","cyclist":"art/cyclist.jpg","cat":"art/cat.jpg","lemon":"art/lemon.jpg","comic":"art/comic.jpg","reel":"art/reel.mp4","loop2":"art/loop2.mp4","comicp1":"art/comic-p1.jpg","comicp2":"art/comic-p2.jpg","comicp3":"art/comic-p3.jpg","comicp4":"art/comic-p4.jpg","wp1":"art/wp1.jpg","wp2":"art/wp2.jpg","wp3":"art/wp3.jpg","house":"art/house.gif","window":"art/loop-window.gif"};
+function A(id){
+  var r = (typeof window !== "undefined" && window.__resources) || {};
+  return r[id] || ASSETS[id];
+}
+const WORKS = [
+  {id:0,num:"001",title:"Wallpaper",a:"WALL",b:"PAPER",kind:"WALLPAPERS",src:"match",meta:"PERSONAL — 2026",tools:"CLIP STUDIO",brief:"Chibi wallpapers for desktop and phone. Minimal black fields with one small character parked in the corner, so icons still have somewhere to live.",pages:["wp1","wp2","wp3"],pageWord:"WALLPAPER",pagesTitle:"DOWNLOAD THE SET · 3 WALLPAPERS",pagesNote:"Two desktop, one phone. Drawn on a black field so they sit quietly behind your icons."},
+  {id:1,num:"002",title:"Portrait",a:"POR",b:"TRAIT",kind:"ILLUSTRATION",src:"fish",meta:"EDITORIAL — 2025",tools:"PROCREATE",brief:"Two fish, two moods. Painted for a print run about colour in cold water."},
+  {id:2,num:"003",title:"Brainwave",a:"BRAIN",b:"WAVE",kind:"KEY ART",src:"brain",meta:"ALBUM ART — 2025",tools:"CLIP STUDIO",brief:"Cover art for a record that sounded like a pink pool in a green valley. I took that literally."},
+  {id:3,num:"004",title:"Comic",a:"CO",b:"MIC",kind:"COMIC SERIES",src:"comicp1",rotate:true,meta:"SHORT COMIC — 2025",tools:"CLIP STUDIO",brief:"Four pages about a boy who kicks an anthill, gets hit by a car, and wakes up convinced he has become an ant. The ants have their own side of the story.",pages:["comicp1","comicp2","comicp3","comicp4"]},
+  {id:4,num:"005",title:"Nightshift",a:"NIGHT",b:"SHIFT",kind:"COMIC",src:"stars",meta:"SHORT COMIC — 2024",tools:"CLIP STUDIO",brief:"Panel one of a six-page comic about someone who cannot sleep and the room that keeps her company."},
+  {id:5,num:"006",title:"Custom",a:"CUS",b:"TOM",kind:"COMMISSIONS",src:"cyclist",meta:"COMMISSION WORK — OPEN",tools:"CLIP STUDIO / PROCREATE",brief:"I take commissions. Character portraits, couple and group pieces, pet portraits, album and poster art, profile pictures, and short animated loops. Send me a reference or just a description and I will send back a sketch before any colour goes down."}
+];
+const HERO = [0,1,2,3,5];
+const LOOPS = [
+  {id:"reel", kind:"video", file:"LOOP_REEL.MP4", note:"PERSONAL · 2026", meta:"HAND DRAWN · ON TWOS"},
+  {id:"house", kind:"image", file:"LOOP_HOUSE.GIF", note:"HAND DRAWN · ON TWOS", meta:"FRAME BY FRAME"},
+  {id:"loop2", kind:"video", file:"LOOP_KIRBY.MP4", note:"PERSONAL · 2026", meta:"CHARACTER LOOP"},
+  {id:"window", kind:"image", file:"LOOP_WINDOW.GIF", note:"PERSONAL · 2026", meta:"FRAME BY FRAME"}
+];
+const FRAMES = ["cat","lemon","comic","cyclist","match","brain"];
+
+class Component extends DCLogic {
+  muteAll(){
+    document.querySelectorAll("video,audio").forEach(m=>{ m.muted = true; m.volume = 0; m.defaultMuted = true; });
+  }
+  componentDidMount(){
+    this._mute = ()=>this.muteAll();
+    ["play","playing","loadeddata","volumechange","canplay"].forEach(ev=>document.addEventListener(ev, this._mute, true));
+    this._muteT = setInterval(this._mute, 500);
+    this.muteAll();
+  }
+  componentWillUnmount(){
+    ["play","playing","loadeddata","volumechange","canplay"].forEach(ev=>document.removeEventListener(ev, this._mute, true));
+    clearInterval(this._muteT);
+  }
+  state = {screen:"home", currentId:0, hero:-1, row:-1, cx:0, cy:0, playing:false, sy:0, ctrl:true, featured:0, ratios:{}, posters:{}, hoverLoop:-1};
+
+
+  open(id){ this.setState({screen:"detail", currentId:id, row:-1, hero:-1}); window.scrollTo(0,0); }
+
+  renderVals(){
+    const s = this.state;
+    const cur = WORKS[s.currentId];
+    const next = WORKS[(s.currentId+1)%WORKS.length];
+    return {
+      isHome: s.screen==="home",
+      isDetail: s.screen==="detail",
+      goHome: ()=>{ this.setState({screen:"home"}); window.scrollTo(0,0); },
+      navItems: [
+        {num:"01",label:"About",href:"#about"},
+        {num:"02",label:"Works",href:"#works"},
+        {num:"03",label:"Process",href:"#process"},
+        {num:"04",label:"Reel",href:"#reel"},
+        {num:"05",label:"Loops",href:"#loops"},
+        {num:"06",label:"Contact",href:"#contact"}
+      ],
+      panels: HERO.map((id,i)=>{
+        const w = WORKS[id];
+        const active = s.hero===i;
+        const dim = s.hero!==-1 && !active;
+        return {
+          a:w.a, b:w.b, kind:w.kind, src:A(w.src),
+          imgStyle: w.rotate
+            ? "position:absolute;top:50%;left:50%;width:100vh;height:auto;max-width:none;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center;filter:grayscale(.15) contrast(1.05);"
+            : "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.15) contrast(1.05);",
+          enter:()=>this.setState({hero:i}),
+          leave:()=>this.setState({hero:-1}),
+          open:()=>this.open(id),
+          style:"position:relative;overflow:hidden;cursor:pointer;border-right:1px solid rgba(23,26,28,.6);flex:"+(active?2.6:(s.hero===-1?1:0.85))+";transition:flex .65s cubic-bezier(.16,1,.3,1),filter .5s;filter:"+(dim?"grayscale(.7) brightness(.6)":"none")+";"
+        };
+      }),
+      works: WORKS.map((w,i)=>({
+        num:w.num, title:w.title, meta:w.meta+" · "+w.kind,
+        enter:()=>this.setState({row:i}),
+        leave:()=>this.setState({row:-1}),
+        open:()=>this.open(w.id),
+        rowStyle:"display:flex;align-items:center;gap:24px;padding:26px 10px 26px 4px;border-bottom:1px solid rgba(42,39,35,.16);cursor:pointer;transition:padding .4s cubic-bezier(.16,1,.3,1),color .3s,background .3s;color:"+(s.row===i?"#41705f":"#2a2723")+";padding-left:"+(s.row===i?"26px":"4px")+";opacity:"+(s.row===-1||s.row===i?1:.55)+";"
+      })),
+      floats: WORKS.map((w,i)=>({
+        src: A(w.src),
+        style: "position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:3px;transition:opacity .18s linear;opacity:"+(s.row===i?1:0)+";"
+      })),
+      floatStyle: "position:fixed;left:"+s.cx+"px;top:"+s.cy+"px;width:240px;height:300px;margin:-150px 0 0 -120px;pointer-events:none;z-index:40;overflow:hidden;border-radius:3px;transition:opacity .35s,transform .5s cubic-bezier(.16,1,.3,1);opacity:"+(s.row>=0?1:0)+";transform:rotate("+(s.row>=0?-4:-14)+"deg) scale("+(s.row>=0?1:.85)+");box-shadow:0 30px 70px rgba(0,0,0,.6);",
+      trackCursor: (e)=>{ this.setState({cx:e.clientX, cy:e.clientY}); },
+      steps: [
+        {num:"01",title:"Scribble",body:"Thumbnails on paper until the pose reads at the size of a thumbnail. Nothing precious survives this stage."},
+        {num:"02",title:"Rough Pass",body:"Key frames blocked out on twos. This is where the timing gets decided and most of the personality shows up."},
+        {num:"03",title:"Clean & Colour",body:"Line goes down, flats go in, then a shading pass. Palette is usually three loud colours and one that argues."},
+        {num:"04",title:"Deliver",body:"Loops exported as GIF, MP4 and a frame sheet, plus the layered file so you can keep working on it."}
+      ],
+      forceMute: (e)=>{ const v = e.currentTarget; v.muted = true; v.volume = 0; },
+      hoverPlay: (e)=>{ const v = e.currentTarget; v.muted = true; v.volume = 0; v.play().catch(()=>{}); },
+      hoverStop: (e)=>{ e.currentTarget.pause(); },
+      replay: (e)=>{ const v = e.currentTarget; v.currentTime = 0; v.play().catch(()=>{}); },
+      loops: LOOPS.map((l,i)=>{
+        const r = s.ratios[l.id] || (l.kind === "video" ? 16/9 : 9/16);
+        const active = s.featured === i;
+        return {
+          src: A(l.id), file: l.file, note: l.note,
+          shownSrc: (s.hoverLoop === i ? A(l.id) : (s.posters[l.id] || A(l.id))),
+          enter: ()=>{ if(this.state.hoverLoop !== i) this.setState({hoverLoop:i}); },
+          leave: ()=>{ if(this.state.hoverLoop === i) this.setState({hoverLoop:-1}); },
+          isVideo: l.kind === "video", isImage: l.kind === "image",
+          badge: active ? "IN REEL" : "PLAY IN REEL",
+          badgeStyle: "position:absolute;left:10px;top:10px;padding:5px 10px;border-radius:100px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;background:" + (active ? "#41705f" : "rgba(246,241,231,.9)") + ";color:" + (active ? "#f6f1e7" : "#2a2723") + ";",
+          figStyle: "margin:0;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:transform .45s cubic-bezier(.16,1,.3,1);transform:translateY(" + (active ? "-4px" : "0") + ");",
+          frameStyle: "position:relative;border:1px solid " + (active ? "#41705f" : "rgba(42,39,35,.18)") + ";border-width:" + (active ? "2px" : "1px") + ";background:#e6dccb;flex:none;height:min(44vh,380px);width:calc(min(44vh,380px) * " + r.toFixed(4) + ");aspect-ratio:" + r.toFixed(4) + ";display:flex;align-items:center;justify-content:center;overflow:hidden;",
+          onMeta: (e)=>{
+            const t = e.currentTarget;
+            const w = t.videoWidth || t.naturalWidth, h = t.videoHeight || t.naturalHeight;
+            if (t.muted !== undefined) { t.muted = true; t.volume = 0; }
+            if (!w || !h) return;
+            const nr = w / h;
+            if (Math.abs((this.state.ratios[l.id] || 0) - nr) > 0.01)
+              this.setState(st => ({ratios: Object.assign({}, st.ratios, {[l.id]: nr})}));
+            if (l.kind === "image" && !this.state.posters[l.id]) {
+              try {
+                const c = document.createElement("canvas");
+                c.width = w; c.height = h;
+                c.getContext("2d").drawImage(t, 0, 0, w, h);
+                const url = c.toDataURL("image/png");
+                this.setState(st => ({posters: Object.assign({}, st.posters, {[l.id]: url})}));
+              } catch(err){}
+            }
+          },
+          select: (e)=>{
+            const fig = e && e.currentTarget;
+            if (fig) { const v = fig.querySelector("video"); if (v) v.pause(); }
+            this.setState({featured:i, playing:true, ctrl:true, hoverLoop:-1});
+            requestAnimationFrame(()=>{
+              const rv = document.querySelector("#reel video");
+              if (rv) { rv.muted = true; rv.volume = 0; rv.play().catch(()=>{}); }
+              this.setState({playing: rv ? !rv.paused : true});
+            });
+          }
+        };
+      }),
+      reelBtnLabel: s.playing ? "PAUSE" : "PLAY",
+      featuredSrc: A(LOOPS[s.featured].id),
+      featuredIsVideo: LOOPS[s.featured].kind === "video",
+      featuredIsImage: LOOPS[s.featured].kind === "image",
+      featuredFile: LOOPS[s.featured].file,
+      featuredMeta: LOOPS[s.featured].meta,
+      featuredMeta_: (e)=>{
+        const v = e.currentTarget; v.muted = true; v.volume = 0;
+        const nr = v.videoWidth / v.videoHeight;
+        if (nr && Math.abs((this.state.ratios[LOOPS[s.featured].id] || 0) - nr) > 0.01)
+          this.setState(st => ({ratios: Object.assign({}, st.ratios, {[LOOPS[s.featured].id]: nr})}));
+      },
+      featuredFrame: "position:relative;border:1px solid rgba(42,39,35,.18);background:#e6dccb;height:min(74vh,700px);aspect-ratio:" + (s.ratios[LOOPS[s.featured].id] || (LOOPS[s.featured].kind === "video" ? 16/9 : 9/16)).toFixed(4) + ";margin:0 auto;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;",
+      reelHoverOn: ()=>{ clearTimeout(this._ctrlT); this.setState({ctrl:true}); },
+      reelHoverOff: ()=>{ clearTimeout(this._ctrlT); this._ctrlT = setTimeout(()=>this.setState({ctrl:false}), 600); },
+      syncReel: (e)=>{
+        const p = !e.currentTarget.paused;
+        if(p !== this.state.playing) this.setState({playing:p});
+      },
+      toggleReel: ()=>{
+        const v = document.querySelector("#reel video");
+        if(v){ if(v.paused){ v.play().catch(()=>{}); } else { v.pause(); } this.setState({playing:!v.paused, ctrl:true}); }
+        else this.setState({playing:!s.playing, ctrl:true});
+        clearTimeout(this._ctrlT);
+        this._ctrlT = setTimeout(()=>this.setState({ctrl:false}), 1100);
+      },
+      playLabel: s.playing?"❚❚ PAUSE":"▶ PLAY",
+      playStyle: "position:absolute;display:flex;align-items:center;justify-content:center;width:132px;height:132px;border-radius:50%;background:rgba(65,112,95,.92);color:#f6f1e7;transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .45s;pointer-events:none;opacity:"+(s.ctrl?1:0)+";transform:scale("+(s.playing?.82:1)+");",
+      current: Object.assign({}, cur, {src:A(cur.src)}),
+      heroImgStyle: cur.pages ? "width:100%;max-height:78vh;object-fit:contain;display:block;border-radius:4px;background:#e6dccb;" : "width:100%;max-height:78vh;object-fit:cover;display:block;border-radius:4px;",
+      hasPages: !!cur.pages,
+      noPages: !cur.pages,
+      pagesTitle: cur.pagesTitle || "READ THE SERIES · " + ((cur.pages||[]).length) + " PAGES",
+      pagesNote: cur.pagesNote || "Drawn and lettered by hand. Read top to bottom.",
+      pages: (cur.pages||[]).map((p,i)=>({
+        src:A(p),
+        label:(cur.pageWord||"PAGE")+" "+String(i+1).padStart(2,"0"),
+        style:"margin:0;display:flex;flex-direction:column;gap:8px;align-self:center;width:100%;max-width:"+(p==="wp3"?"420px":"100%")+";"
+      })),
+      frames: FRAMES.map((f,i)=>({src:A(f),label:"F"+String(i*4+1).padStart(3,"0")})),
+      nextTitle: next.title,
+      nextWork: ()=>this.open(next.id)
+    };
+  }
+}
+</script>
+</body>
+</html>

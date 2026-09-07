@@ -1,0 +1,824 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   LAYERING NOTE — read before adding rules here.
+
+   Tailwind v4 emits its utilities inside `@layer utilities`. Unlayered CSS
+   always beats layered CSS, whatever the specificity. So a bare `a { color }`
+   written outside a layer silently overrides every `text-*` utility on every
+   link on the site. Element rules therefore go in `@layer base`, our own class
+   rules in `@layer components`, and utilities stay free to override both.
+   --------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------- Tokens
+   Design tokens — README "Design tokens". Do not add colours here.        */
+@theme {
+  --color-cream: #f6f1e7;
+  --color-ink: #2a2723;
+  /* ACCENT TRIAL — rose in place of the original sage. Revert by restoring
+     #41705f / #b9d3c7 / #8fb0a5. Token names still say "sage"; rename them
+     across the codebase only once this is confirmed as the palette. */
+  --color-sage: #b0305a; /* Deep Rose — primary accent */
+  --color-sage-light: #edb3c4; /* light tint: the degree mark sits ON the
+                                  accent bar, where Rose reads at 1.6:1 */
+  --color-sage-mid: #d45a7a; /* Rose — hero panel second word */
+  --color-bone: #e6dccb;
+  --color-bone-hover: #ece4d6;
+  --color-panel-ink: #e8e6e0;
+
+  --font-display: var(--font-anton), Impact, sans-serif;
+  --font-body: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --hairline: rgba(42, 39, 35, 0.16);
+  --hairline-strong: rgba(42, 39, 35, 0.28);
+  --scrim: linear-gradient(
+    180deg,
+    rgba(23, 26, 28, 0.55) 0%,
+    rgba(23, 26, 28, 0.05) 40%,
+    rgba(23, 26, 28, 0.8) 100%
+  );
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------- Keyframes */
+@keyframes t-hero-sink {
+  to {
+    transform: scale(0.9) translateY(-40px);
+    opacity: 0.65;
+  }
+}
+@keyframes t-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* One copy width. Marquee.tsx sets the percentage from the copy count. */
+    transform: translateX(calc(-1 * var(--marquee-shift, 50%)));
+  }
+}
+@keyframes t-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes t-blink {
+  0%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  94%,
+  98% {
+    opacity: 0.15;
+  }
+}
+
+/* =========================================================== BASE ========= */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--color-cream);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    position: relative;
+    /* `clip`, not `hidden`: `hidden` would make body a scroll container and
+       break `position: sticky` on the hero. */
+    overflow-x: clip;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background: var(--color-sage);
+    color: var(--color-cream);
+  }
+
+  a {
+    color: var(--color-sage);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-ink);
+  }
+
+  /* Clear the fixed pill navbar when an anchor is targeted. */
+  section[id] {
+    scroll-margin-top: 92px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-sage);
+  }
+}
+
+/* ====================================================== COMPONENTS ======== */
+@layer components {
+  /* ------------------------------------------------------------- Type roles */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-sage);
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  .prose-body {
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 56ch;
+    opacity: 0.78;
+    text-wrap: pretty;
+  }
+
+  /* ---------------------------------------------------------------- Reveal
+     Fail open: the hidden state is only ever applied by JS once the observer
+     is confirmed alive. Without JS, content renders visible.                */
+  [data-reveal] {
+    transition:
+      opacity 0.85s var(--ease),
+      transform 0.95s var(--ease);
+  }
+  [data-reveal="hidden"] {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  /* -------------------------------------------------------------- Hero sink
+     Scroll-driven where supported; HeroScroll.tsx runs a throttled rAF
+     fallback and disables itself when this timeline is available.           */
+  .hero-inner {
+    will-change: transform, opacity;
+  }
+  @supports (animation-timeline: scroll(root)) {
+    .hero-inner {
+      animation: t-hero-sink linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+
+  /* ------------------------------------------------------------ Hero panels
+     The expand/dim interaction is CSS only: no state, no JS, and it simply
+     does not engage on touch, where the strip becomes a swipeable rail.     */
+  .hero-strip {
+    display: flex;
+  }
+
+  .hero-panel {
+    position: relative;
+    flex: 1 1 0%;
+    overflow: hidden;
+    cursor: pointer;
+    border-right: 1px solid rgba(23, 26, 28, 0.6);
+    transition:
+      flex 0.65s var(--ease),
+      filter 0.5s;
+  }
+  .hero-panel:last-child {
+    border-right: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .hero-strip:hover .hero-panel {
+      /* Softened from the prototype's .6 — siblings should recede, not
+         disappear. */
+      filter: grayscale(0.55) brightness(0.72);
+    }
+    .hero-strip .hero-panel:hover {
+      flex: 2.6 1 0%;
+      filter: none;
+    }
+  }
+
+  .hero-strip:focus-within .hero-panel {
+    filter: grayscale(0.55) brightness(0.72);
+  }
+  .hero-strip:focus-within .hero-panel:focus-visible {
+    flex: 2.6 1 0%;
+    filter: none;
+    outline: 2px solid var(--color-cream);
+    outline-offset: -6px;
+  }
+
+  @media (max-width: 767px) {
+    .hero-strip {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .hero-strip::-webkit-scrollbar {
+      display: none;
+    }
+    .hero-panel {
+      flex: 0 0 78%;
+      scroll-snap-align: center;
+    }
+  }
+
+  /* --------------------------------------------------------------- Marquee
+     Scrollable so the wheel and a mouse drag can move it, and paused while
+     the pointer is over it.                                                */
+  .marquee {
+    overflow-x: auto;
+    overflow-y: hidden;
+    cursor: grab;
+    /* This is a drag surface, so a drag must not sweep a text selection
+       across the software names. */
+    user-select: none;
+    -webkit-user-select: none;
+    /* Vertical page scroll still belongs to the page on touch. */
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .marquee::-webkit-scrollbar {
+    display: none;
+  }
+  .marquee:active {
+    cursor: grabbing;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: t-marquee var(--marquee-duration, 26s) linear infinite;
+  }
+
+  /* Each software name lights up on its own. The opacity lives on the item
+     rather than the row, so hover can lift it back to full. */
+  .marquee-item {
+    opacity: 0.62;
+    transition:
+      color 0.25s,
+      opacity 0.25s;
+  }
+  .marquee-item:hover {
+    opacity: 1;
+    color: var(--color-sage);
+  }
+
+  /* ---------------------------------------------------------------- CTA pill
+     Hovering used to swap the fill to cream, which erased the capsule against
+     the cream page. It just moves to the secondary accent instead. */
+  .cta-pill {
+    background-color: var(--color-sage);
+    transition: background-color 0.3s var(--ease);
+  }
+  .cta-pill:hover {
+    background-color: var(--color-sage-mid);
+  }
+
+  /* ----------------------------------------------------------------- Sheet */
+  .page-sheet {
+    position: relative;
+    z-index: 2;
+    background: var(--color-cream);
+    border-radius: 26px 26px 0 0;
+    box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+  }
+
+  /* ------------------------------------------------------------ Work index */
+  .work-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 26px 10px 26px 4px;
+    border-bottom: 1px solid var(--hairline);
+    cursor: pointer;
+    color: var(--color-ink);
+    transition:
+      padding 0.4s var(--ease),
+      color 0.3s,
+      opacity 0.3s;
+  }
+  .work-row:first-child {
+    border-top: 1px solid var(--hairline);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    /* Softened from .55 — unhovered rows should read as secondary, not
+       vanish. */
+    .work-list:hover .work-row {
+      opacity: 0.78;
+    }
+    .work-list .work-row:hover {
+      opacity: 1;
+      color: var(--color-sage);
+      padding-left: 26px;
+    }
+  }
+  .work-row:focus-visible {
+    opacity: 1;
+    color: var(--color-sage);
+    padding-left: 26px;
+    outline: none;
+  }
+
+  /* ------------------------------------------------------- Work preview
+     Follows the cursor and fades in only while a row is hovered.
+     Two elements on purpose: the outer one carries position (written by rAF,
+     no transition, so tracking is instant) and the inner one carries the
+     transitioned rotate/scale/opacity.                                     */
+  .work-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  .work-preview-inner {
+    position: relative;
+    width: 240px;
+    height: 300px;
+    /* Half of each dimension, so the panel centres on the cursor. */
+    margin: -150px 0 0 -120px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--color-bone);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+    transition:
+      opacity 0.35s,
+      transform 0.5s var(--ease);
+  }
+
+  /* No cursor to follow on touch. */
+  @media (hover: none), (pointer: coarse) {
+    .work-preview {
+      display: none;
+    }
+  }
+
+  /* --------------------------------------------------------------- Process */
+  .process-cell {
+    background: var(--color-cream);
+    transition: background 0.3s;
+  }
+  .process-cell:hover {
+    background: var(--color-bone-hover);
+  }
+
+  /* ------------------------------------------------------------ Reel stage
+     A fixed-height ink matte. The clip is contained rather than sized to its
+     own ratio, so portrait and landscape clips share one frame and the
+     layout never reflows between them.                                     */
+  .reel-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: min(62vh, 580px);
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--color-ink);
+    border: 1px solid var(--color-ink);
+  }
+  .reel-stage:focus-visible {
+    outline: 2px solid var(--color-sage);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 1023px) {
+    .reel-stage {
+      height: min(52vh, 420px);
+    }
+  }
+
+  /* ---------------------------------------------------------- Reel control */
+  .reel-control {
+    color: var(--color-ink);
+    border: 1px solid var(--hairline-strong);
+    background: transparent;
+    cursor: pointer;
+    transition:
+      background-color 0.3s var(--ease),
+      color 0.3s var(--ease),
+      border-color 0.3s var(--ease);
+  }
+  .reel-control:hover {
+    background: var(--color-sage);
+    border-color: var(--color-sage);
+    color: var(--color-cream);
+  }
+  /* Sound is a state, not just an action — show it filled while it is on. */
+  .reel-control.is-on {
+    background: var(--color-sage);
+    border-color: var(--color-sage);
+    color: var(--color-cream);
+  }
+
+  /* ----------------------------------------------------------------- Loops
+     One shared height; each card takes its width from its own intrinsic
+     ratio. Fixed aspect boxes produced letterboxing and a dead gutter.     */
+  .loop-row {
+    --loop-h: min(44vh, 380px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .loop-frame {
+    height: var(--loop-h);
+    width: calc(var(--loop-h) * var(--loop-ratio, 1));
+    transition:
+      border-color 0.3s,
+      box-shadow 0.45s var(--ease);
+  }
+  .loop-row figure:hover .loop-frame {
+    box-shadow: 0 18px 40px rgba(42, 39, 35, 0.18);
+  }
+
+  @media (max-width: 1023px) {
+    /* Too wide to wrap sensibly — becomes a swipeable rail instead. */
+    .loop-row {
+      --loop-h: min(38vh, 300px);
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .loop-row::-webkit-scrollbar {
+      display: none;
+    }
+    .loop-row > figure {
+      flex: none;
+      scroll-snap-align: start;
+    }
+  }
+
+  /* ------------------------------------------------------------- Art grid
+     Every piece is a square thumb linking to its own page. Squares keep the
+     grid even across wildly different source ratios; the full ratio is
+     honoured on the piece's own page.                                       */
+  .art-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  @media (min-width: 640px) {
+    .art-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 1024px) {
+    .art-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .art-thumb {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--color-ink);
+  }
+
+  .art-thumb-frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 3px;
+    background: var(--color-bone);
+    border: 1px solid var(--hairline);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.45s var(--ease),
+      transform 0.45s var(--ease);
+  }
+  .art-thumb:hover .art-thumb-frame,
+  .art-thumb:focus-visible .art-thumb-frame {
+    border-color: var(--color-sage);
+    box-shadow: 0 18px 40px rgba(42, 39, 35, 0.18);
+    transform: translateY(-4px);
+  }
+  .art-thumb img {
+    transition: transform 0.6s var(--ease);
+  }
+  .art-thumb:hover img {
+    transform: scale(1.04);
+  }
+
+  .art-thumb-tag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 4px 8px;
+    border-radius: 100px;
+    font-size: 8.5px;
+    letter-spacing: 0.16em;
+    background: rgba(246, 241, 231, 0.9);
+    color: var(--color-ink);
+  }
+
+  .art-thumb-title {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    transition: color 0.25s, opacity 0.25s;
+  }
+  .art-thumb:hover .art-thumb-title {
+    color: var(--color-sage);
+    opacity: 1;
+  }
+
+  /* --------------------------------------------------------- Comic reader
+     One column, pages stacked in reading order and butted together, the way
+     a webcomic reads.                                                       */
+  .comic-reader {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 1100px;
+    margin: 44px auto 0;
+    padding: 0 28px;
+  }
+
+  .comic-page {
+    position: relative;
+    margin: 0;
+  }
+  .comic-page + .comic-page {
+    margin-top: 4px;
+  }
+
+  .comic-page-num {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-size: 9px;
+    background: rgba(42, 39, 35, 0.72);
+    color: var(--color-cream);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .comic-page:hover .comic-page-num {
+    opacity: 1;
+  }
+  @media (hover: none) {
+    .comic-page-num {
+      opacity: 1;
+    }
+  }
+
+  /* -------------------------------------------------------------- Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    background: rgba(20, 18, 16, 0.94);
+    backdrop-filter: blur(6px);
+  }
+
+  .lightbox-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    flex: none;
+  }
+  .lightbox-title {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-cream);
+    opacity: 0.8;
+  }
+  .lightbox-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lightbox-zoom {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--color-cream);
+    opacity: 0.55;
+    min-width: 44px;
+    text-align: center;
+  }
+  .lightbox-btn {
+    padding: 7px 13px;
+    border-radius: 100px;
+    border: 1px solid rgba(246, 241, 231, 0.28);
+    background: transparent;
+    color: var(--color-cream);
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      background-color 0.25s,
+      border-color 0.25s;
+  }
+  .lightbox-btn:hover {
+    background: var(--color-sage);
+    border-color: var(--color-sage);
+  }
+
+  .lightbox-stage {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .lightbox-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+  }
+  .lightbox-img,
+  .lightbox-video {
+    max-width: min(94vw, 1600px);
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(246, 241, 231, 0.28);
+    background: rgba(20, 18, 16, 0.55);
+    color: var(--color-cream);
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+  .lightbox-nav:hover {
+    background: var(--color-sage);
+  }
+  .lightbox-nav.is-prev {
+    left: 16px;
+  }
+  .lightbox-nav.is-next {
+    right: 16px;
+  }
+
+  .lightbox-foot {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px 22px;
+    text-align: center;
+  }
+  .lightbox-note {
+    margin: 0;
+    max-width: 62ch;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-cream);
+    opacity: 0.7;
+    text-wrap: pretty;
+  }
+  .lightbox-count {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--color-cream);
+    opacity: 0.45;
+  }
+
+  @media (max-width: 640px) {
+    .lightbox-nav {
+      display: none;
+    }
+    .lightbox-img,
+    .lightbox-video {
+      max-height: 68vh;
+    }
+  }
+
+  /* Comic pages are buttons that open the viewer; strip the button chrome. */
+  .comic-page-btn {
+    position: relative;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: zoom-in;
+    display: block;
+    width: 100%;
+  }
+
+  /* -------------------------------------------------------- Detail frames */
+  .frame-thumb img {
+    filter: grayscale(1) contrast(1.1);
+    opacity: 0.55;
+    transition:
+      filter 0.4s,
+      opacity 0.4s;
+  }
+  .frame-thumb:hover img {
+    filter: none;
+    opacity: 1;
+  }
+
+  /* ---------------------------------------------------- Next project bar */
+  .next-bar {
+    transition: background 0.3s;
+  }
+  .next-bar:hover {
+    background: var(--color-bone-hover);
+  }
+}
+
+/* ================================================== REDUCED MOTION ========
+   Unlayered on purpose: this must win over everything above.               */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  .hero-inner {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .bob {
+    animation: none !important;
+  }
+  [data-reveal] {
+    transition: none;
+  }
+  [data-reveal="hidden"] {
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
