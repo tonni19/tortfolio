@@ -396,6 +396,24 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 512
   },
   {
+    "id": "my-avatars/notjustpfp",
+    "category": "my-avatars",
+    "slug": "notjustpfp",
+    "kind": "image",
+    "src": "/art/my-avatars/notjustpfp.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "id": "my-avatars/pfpwwww",
+    "category": "my-avatars",
+    "slug": "pfpwwww",
+    "kind": "image",
+    "src": "/art/my-avatars/pfpwwww.webp",
+    "width": 1080,
+    "height": 1080
+  },
+  {
     "id": "my-avatars/tortilla",
     "category": "my-avatars",
     "slug": "tortilla",
@@ -403,6 +421,15 @@ export const MEDIA: readonly MediaItem[] = [
     "src": "/art/my-avatars/tortilla.webp",
     "width": 1080,
     "height": 1350
+  },
+  {
+    "id": "my-avatars/trnsprn",
+    "category": "my-avatars",
+    "slug": "trnsprn",
+    "kind": "image",
+    "src": "/art/my-avatars/trnsprn.webp",
+    "width": 1080,
+    "height": 1080
   },
   {
     "id": "portrait/coco",

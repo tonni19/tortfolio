@@ -208,6 +208,18 @@ const DETAILS: Record<string, Detail> = {
   },
 
   // ------------------------------------------------------------ my avatars
+  "my-avatars/trnsprn": {
+    title: "Not Just a PFP",
+    note: "Self portrait mid-draw — a giant hand and pencil working on her, the drawing app's toolbar still open around the edges. Cut out, so the page shows through.",
+  },
+  "my-avatars/notjustpfp": {
+    title: "Not Just a PFP",
+    note: "Self portrait mid-draw — a giant hand and pencil working on her, the drawing app's toolbar still open around the edges.",
+  },
+  "my-avatars/pfpwwww": {
+    title: "PFP",
+    note: "The same self portrait cropped close on black, without the interface around it.",
+  },
   "my-avatars/tortilla": {
     title: "Tortilla",
     note: "Self portrait as a wide-eyed sketch with a mop of hair and star-tipped shoes.",

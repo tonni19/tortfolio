@@ -99,6 +99,7 @@ scripts/build-media.mjs the pipeline
 (public/art/legacy/ is no longer used by any page and is excluded from
  the repo; the originals are kept with the media masters)
 CLAUDE.md       design rules and the traps that have already bitten us
+reference/      the original design brief and HTML prototype, kept for history
 ```
 
 ## Before going live
