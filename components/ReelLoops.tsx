@@ -264,7 +264,10 @@ export default function ReelLoops() {
         <div className="mb-7 flex flex-wrap items-baseline gap-[18px]">
           <h3 className="eyebrow m-0">ALL LOOPS</h3>
           <span className="meta opacity-45">
-            HOVER TO PREVIEW · CLICK TO SEND IT TO THE PLAYER
+            <span className="only-hover">
+              HOVER TO PREVIEW · CLICK TO SEND IT TO THE PLAYER
+            </span>
+            <span className="only-touch">TAP A LOOP TO PLAY IT ABOVE</span>
           </span>
         </div>
 

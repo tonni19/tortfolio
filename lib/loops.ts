@@ -1,11 +1,7 @@
 /**
- * The reel's clips.
- *
- * `house` and `kirby` are the original web-sized exports. `animationn` and
- * `qweqeqeqeqe` come from the managed media because they carry sound and have
- * no lightweight counterpart — they are also very heavy (57 MB and 16 MB), so
- * the light clip is deliberately first: it is the one that autoplays, and the
- * heavy two only load when selected.
+ * The reel's clips — all four now come from the managed media, so their
+ * filenames and URLs read properly and ffmpeg keeps them small. The lightest
+ * clip is deliberately first, because that is the one that autoplays.
  */
 
 import { media } from "./media.generated";
@@ -24,26 +20,35 @@ export type Loop = {
   hasAudio?: boolean;
 };
 
-const stillMore = media("animation/animationn");
-const sunburst = media("animation/qweqeqeqeqe");
+const clip = (id: string) => {
+  const item = media(id);
+  return { src: item.src, ratio: item.width / item.height, poster: item.poster };
+};
+
+const hut = clip("animation/the-hut");
+const kirby = clip("animation/late-for-8-am");
+const stillMore = clip("animation/still-more");
+const sunburst = clip("animation/sunburst");
 
 export const LOOPS: readonly Loop[] = [
   {
-    id: "house",
-    kind: "image",
-    src: "/art/legacy/house.gif",
-    poster: "/art/legacy/house-poster.webp",
-    ratio: 800 / 1422,
-    file: "LOOP_HOUSE.GIF",
+    id: "the-hut",
+    kind: "video",
+    src: hut.src,
+    poster: hut.poster,
+    ratio: hut.ratio,
+    file: "THE HUT",
     note: "HAND DRAWN · ON TWOS",
     meta: "FRAME BY FRAME",
+    hasAudio: true,
   },
   {
-    id: "loop2",
+    id: "late-for-8-am",
     kind: "video",
-    src: "/art/legacy/loop2.mp4",
-    ratio: 1920 / 1080,
-    file: "LOOP_KIRBY.MP4",
+    src: kirby.src,
+    poster: kirby.poster,
+    ratio: kirby.ratio,
+    file: "LATE FOR 8 AM",
     note: "PERSONAL · 2026",
     meta: "CHARACTER LOOP",
     hasAudio: true,
@@ -52,8 +57,9 @@ export const LOOPS: readonly Loop[] = [
     id: "still-more",
     kind: "video",
     src: stillMore.src,
-    ratio: stillMore.width / stillMore.height,
-    file: "STILL_MORE.MP4",
+    poster: stillMore.poster,
+    ratio: stillMore.ratio,
+    file: "STILL MORE",
     note: "PERSONAL · 2026",
     meta: "HAND DRAWN · WITH SOUND",
     hasAudio: true,
@@ -62,8 +68,9 @@ export const LOOPS: readonly Loop[] = [
     id: "sunburst",
     kind: "video",
     src: sunburst.src,
-    ratio: sunburst.width / sunburst.height,
-    file: "SUNBURST.MP4",
+    poster: sunburst.poster,
+    ratio: sunburst.ratio,
+    file: "SUNBURST",
     note: "PERSONAL · 2026",
     meta: "HAND DRAWN · WITH SOUND",
     hasAudio: true,

@@ -70,6 +70,16 @@
     transform: translateY(-14px);
   }
 }
+@keyframes nav-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 @keyframes t-blink {
   0%,
   92%,
@@ -243,19 +253,34 @@
     outline-offset: -6px;
   }
 
+  /* On a phone the five panels become a grid that fits one screen. A swipe
+     rail hid four of the five works behind an invisible gesture; a grid
+     shows all of them at once and every tile is a normal tap. */
   @media (max-width: 767px) {
     .hero-strip {
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .hero-strip::-webkit-scrollbar {
-      display: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 0.82fr;
+      gap: 1px;
+      overflow: hidden;
     }
     .hero-panel {
-      flex: 0 0 78%;
-      scroll-snap-align: center;
+      flex: none;
+      border-right: 0;
+    }
+    /* The fifth tile takes the full width of the last row. */
+    .hero-panel:nth-child(5) {
+      grid-column: 1 / -1;
+    }
+    .hero-caption {
+      bottom: 14px;
+    }
+    .hero-caption-line {
+      font-size: 21px;
+    }
+    .hero-caption-kind {
+      font-size: 9px;
+      margin-top: 6px;
     }
   }
 
@@ -476,24 +501,26 @@
     box-shadow: 0 18px 40px rgba(42, 39, 35, 0.18);
   }
 
+  /* Phones get a grid rather than a sideways rail. The shared-height rule
+     only makes sense in a row, so a tile here is a fixed box and the clip is
+     contained inside it. */
   @media (max-width: 1023px) {
-    /* Too wide to wrap sensibly — becomes a swipeable rail instead. */
     .loop-row {
-      --loop-h: min(38vh, 300px);
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 8px;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .loop-row::-webkit-scrollbar {
-      display: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
     }
     .loop-row > figure {
-      flex: none;
-      scroll-snap-align: start;
+      min-width: 0;
+    }
+    /* The tile takes the clip's own ratio, so nothing is cropped and nothing
+       is letterboxed — forcing a fixed box here put bone bars down the sides
+       of the 9:16 clips. (An `object-fit` override would not have helped:
+       Tailwind's `object-contain` utility outranks a component-layer rule.) */
+    .loop-frame {
+      width: 100%;
+      height: auto;
+      aspect-ratio: var(--loop-ratio, 1);
     }
   }
 
@@ -614,6 +641,104 @@
     .comic-page-num {
       opacity: 1;
     }
+  }
+
+  /* --------------------------------------------------------------- Nav menu */
+  .nav-toggle {
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 100px;
+    border: 1px solid rgba(246, 241, 231, 0.4);
+    background: transparent;
+    color: var(--color-cream);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .nav-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 96px 28px 40px;
+    background: var(--color-sage);
+    animation: nav-sheet-in 0.28s var(--ease) both;
+  }
+  .nav-sheet[hidden] {
+    display: none;
+  }
+  .nav-sheet nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-sheet-link {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 16px 0;
+    color: var(--color-cream);
+    border-bottom: 1px solid rgba(246, 241, 231, 0.18);
+  }
+  .nav-sheet-link:hover,
+  .nav-sheet-link:active {
+    color: var(--color-cream);
+  }
+  .nav-sheet-num {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    opacity: 0.55;
+  }
+  .nav-sheet-label {
+    font-size: clamp(30px, 9vw, 44px);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* ----------------------------------------------------------------- Touch
+     Fingers are not cursors. On a coarse pointer every control gets at least
+     a 44px tall hit area — the visual size is unchanged, the padding just
+     grows around it — and hover-only wording is swapped for tap wording.   */
+  .only-touch {
+    display: none;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .only-hover {
+      display: none;
+    }
+    .only-touch {
+      display: inline;
+    }
+
+    .tap-link,
+    .nav-link,
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+
+    /* The nav pill would grow with its links, so pull its own padding back. */
+    .nav-link {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .lightbox-btn,
+    .reel-control {
+      min-height: 44px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .lightbox-bar {
+      padding: 10px 14px;
+    }
+
   }
 
   /* -------------------------------------------------------------- Lightbox */

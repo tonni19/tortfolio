@@ -8,23 +8,11 @@
 
 import { media } from "./media.generated";
 
-export type Art = { src: string; width: number; height: number };
-
 /**
- * Pieces from the original handoff bundle that have no home in Categorized/
- * yet. Everything else on the site now comes from lib/media.generated.ts.
- * Move these into a category folder and they can be retired.
+ * Every work now points at a category folder, so covers and pieces all come
+ * from lib/media.generated.ts. The old bundle art in public/art/legacy/ is no
+ * longer referenced by any page.
  */
-export const ART = {
-  fish: { src: "/art/legacy/fish.jpg", width: 1500, height: 1075 },
-  brain: { src: "/art/legacy/brain.jpg", width: 1060, height: 1500 },
-  smoke: { src: "/art/legacy/smoke.jpg", width: 1060, height: 1500 },
-  stars: { src: "/art/legacy/stars.jpg", width: 1060, height: 1500 },
-  lemon: { src: "/art/legacy/lemon.jpg", width: 1000, height: 1500 },
-  cat: { src: "/art/legacy/cat.jpg", width: 627, height: 575 },
-} as const satisfies Record<string, Art>;
-
-export type ArtKey = keyof typeof ART;
 
 type WorkInput = {
   slug: string;
@@ -40,8 +28,6 @@ type WorkInput = {
   category?: string;
   /** Media id used for the hero panel and the work-index preview. */
   cover?: string;
-  /** Fallback cover for works with no category folder yet. */
-  art?: ArtKey;
   meta: string;
   tools: string;
   brief: string;
@@ -62,7 +48,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     b: "PAPER",
     kind: "WALLPAPERS",
     category: "wallpaper",
-    cover: "wallpaper/final111",
+    cover: "wallpaper/strike",
     meta: "PERSONAL — 2026",
     tools: "CLIP STUDIO",
     brief:
@@ -75,7 +61,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     b: "TRAIT",
     kind: "ILLUSTRATION",
     category: "portrait",
-    cover: "portrait/new1-copy",
+    cover: "portrait/smoke",
     meta: "PERSONAL — 2025",
     tools: "CLIP STUDIO / PROCREATE",
     brief:
@@ -88,7 +74,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     b: "CHARACTERS",
     kind: "GAME ART",
     category: "game-characters",
-    cover: "game-characters/drmtwork",
+    cover: "game-characters/model-sheet",
     meta: "GAME JAM — 2026",
     tools: "ASEPRITE / CLIP STUDIO",
     // Drafted from the artist's CV — needs her sign-off before launch.
@@ -102,7 +88,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     b: "MIC",
     kind: "COMIC SERIES",
     category: "comic",
-    cover: "comic/your-paragraph-text",
+    cover: "comic/we-stay-prepared",
     meta: "SHORT COMIC — 2025",
     tools: "CLIP STUDIO",
     brief:
@@ -115,7 +101,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     b: "MATION",
     kind: "FRAME BY FRAME",
     category: "animation",
-    cover: "animation/qweqeqeqeqe",
+    cover: "animation/sunburst",
     meta: "PERSONAL — 2026",
     tools: "CALLIPEG / CLIP STUDIO",
     brief:
@@ -128,7 +114,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     b: "TOM",
     kind: "COMMISSIONS",
     category: "custom",
-    cover: "custom/back",
+    cover: "custom/car-14-livery",
     meta: "COMMISSION WORK — OPEN",
     tools: "CLIP STUDIO / PROCREATE",
     brief:
@@ -173,8 +159,7 @@ export function coverOf(work: Work): { src: string; width: number; height: numbe
       height: item.height,
     };
   }
-  if (work.art) return ART[work.art];
-  throw new Error(`Work "${work.slug}" has neither a cover nor legacy art.`);
+  throw new Error(`Work "${work.slug}" has no cover.`);
 }
 
 export const HERO_WORKS: readonly Work[] = HERO_SLUGS.map((slug) => {
@@ -182,16 +167,6 @@ export const HERO_WORKS: readonly Work[] = HERO_SLUGS.map((slug) => {
   if (!work) throw new Error(`HERO_SLUGS references unknown work "${slug}"`);
   return work;
 });
-
-/** Frame thumbs shown on detail pages for works with no category folder. */
-export const DETAIL_FRAMES: readonly ArtKey[] = [
-  "cat",
-  "lemon",
-  "smoke",
-  "fish",
-  "brain",
-  "stars",
-];
 
 /**
  * Section 03. Rewritten from the commission workflow on the artist's CV:

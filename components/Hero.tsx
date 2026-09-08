@@ -40,9 +40,9 @@ export default function Hero() {
                 style={{ backgroundImage: SCRIM }}
               />
 
-              <div className="absolute right-0 bottom-[26px] left-0 flex flex-col items-center gap-[2px] px-3 text-center">
+              <div className="hero-caption absolute right-0 bottom-[26px] left-0 flex flex-col items-center gap-[2px] px-3 text-center">
                 <span
-                  className="font-display text-[clamp(26px,3.1vw,52px)] text-panel-ink"
+                  className="hero-caption-line font-display text-[clamp(26px,3.1vw,52px)] text-panel-ink"
                   style={{
                     lineHeight: 0.86,
                     letterSpacing: ".01em",
@@ -52,13 +52,13 @@ export default function Hero() {
                   {work.a}
                 </span>
                 <span
-                  className="font-display text-[clamp(26px,3.1vw,52px)] text-sage-mid"
+                  className="hero-caption-line font-display text-[clamp(26px,3.1vw,52px)] text-sage-mid"
                   style={{ lineHeight: 0.86, textShadow: CAPTION_SHADOW }}
                 >
                   {work.b}
                 </span>
                 <span
-                  className="font-mono mt-[10px] text-[11px] text-cream uppercase opacity-90"
+                  className="hero-caption-kind font-mono mt-[10px] text-[11px] text-cream uppercase opacity-90"
                   style={{
                     letterSpacing: ".2em",
                     textShadow: "0 2px 10px rgba(0,0,0,.85)",

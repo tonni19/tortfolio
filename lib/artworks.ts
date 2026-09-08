@@ -25,162 +25,162 @@ type Detail = { title: string; note: string };
 
 const DETAILS: Record<string, Detail> = {
   // ------------------------------------------------------------- animation
-  "animation/qweqeqeqeqe": {
+  "animation/sunburst": {
     title: "Sunburst",
     note: "Figures tumbling in a ring over a yellow sunburst before one is left alone on the field. Hand drawn, on twos.",
   },
-  "animation/animationn": {
+  "animation/still-more": {
     title: "Still More",
     note: "A girl at a window beside a note asking whether she has lived through all her good days, or whether there is still more.",
   },
-  "animation/dooooorr1": {
+  "animation/the-hut": {
     title: "The Hut",
     note: "A hut on stilts under drifting clouds, drawn in loose ink over a warm ground.",
   },
-  "animation/kirbyyy": {
+  "animation/late-for-8-am": {
     title: "Late for 8 AM",
     note: "A short character loop with hand lettering — running, and not going to make it.",
   },
 
   // ----------------------------------------------------------------- comic
-  "comic/your-paragraph-text": {
+  "comic/we-stay-prepared": {
     title: "We Stay Prepared",
     note: "Two panels: a pair of eyes in close-up, then a face and a card about summoning happy feelings at the cost of sadness.",
   },
-  "comic/ants-01-document-0": {
+  "comic/ants-01-the-anthill": {
     title: "The Anthill",
     note: "He kicks the anthill and runs. Page one of the short.",
   },
-  "comic/ants-02-document-1": {
+  "comic/ants-02-impact": {
     title: "Impact",
     note: "The car, the crash, and the colony closing in around him.",
   },
-  "comic/ants-04-ending-page-22": {
+  "comic/ants-04-ward": {
     title: "Ward",
     note: "Awake in a hospital bed, and certain about what he saw.",
   },
-  "comic/ants-05-ending-page-23": {
+  "comic/ants-05-ants": {
     title: "Ants!!",
     note: "The same room, one beat later, and nobody believes him.",
   },
-  "comic/ants-03-ending-scene1": {
+  "comic/ants-03-the-colony": {
     title: "The Colony",
     note: "Underground, the ants get their own side of the story.",
   },
 
   // ---------------------------------------------------------------- custom
-  "custom/back": {
+  "custom/car-14-livery": {
     title: "Car 14 — Livery",
     note: "Side and top elevation of a racing livery in teal and lime, numbered 14.",
   },
-  "custom/front-1": {
+  "custom/cat-nap": {
     title: "Cat Nap",
     note: "A ginger cat asleep on top of a carrier, drawn small and flat for print.",
   },
-  "custom/logoo2": {
+  "custom/mayer-doa-studio": {
     title: "Mayer Doa Studio",
     note: "A peacock crest with Bengali lettering, banner and florals, on a hot yellow field.",
   },
-  "custom/logo-final-istg-nimbu": {
+  "custom/nimbu": {
     title: "Nimbu",
     note: "Wordmark for Nimbu — a dripping lemon set inside a hypnotic cream and sage swirl.",
   },
-  "custom/binn": {
+  "custom/sorting-unit": {
     title: "Sorting Unit",
     note: "A recycling unit drawn flat and clean, with sorting slots colour-coded along the base.",
   },
-  "custom/document-2": {
+  "custom/rickshaw": {
     title: "Rickshaw",
     note: "A cyclist hauling a rickshaw through neon traffic and flame, in halftone and hot purple.",
   },
 
   // -------------------------------------------------------- game characters
-  "game-characters/drmtwork": {
+  "game-characters/model-sheet": {
     title: "Model Sheet",
     note: "Character reference on black — full figure, colour swatches and a hand study kept together on one board.",
   },
-  "game-characters/main-charac-front": {
+  "game-characters/lead-front": {
     title: "Lead — Front",
     note: "The player character, front view: heavy black hair, olive and purple layers.",
   },
-  "game-characters/main-charac-bigframe": {
+  "game-characters/lead-bust": {
     title: "Lead — Bust",
     note: "The same character framed for dialogue, hair tied up.",
   },
-  "game-characters/fff": {
+  "game-characters/spearbearer": {
     title: "Spearbearer",
     note: "A tall figure with a spear and a patterned wrap skirt, painted full length.",
   },
-  "game-characters/bazar-npc": {
+  "game-characters/bazaar-npc-tank": {
     title: "Bazaar NPC — Tank",
     note: "Market crowd filler: a boy in a blue tank top, full figure.",
   },
-  "game-characters/bazar-npc2": {
+  "game-characters/bazaar-npc-elder": {
     title: "Bazaar NPC — Elder",
     note: "Market crowd filler: an older man in a teal shirt.",
   },
-  "game-characters/bazar-npc3": {
+  "game-characters/bazaar-npc-cap": {
     title: "Bazaar NPC — Cap",
     note: "Market crowd filler: a boy in a topi and olive kurta.",
   },
-  "game-characters/bazar-npc-bigframe": {
+  "game-characters/bazaar-npc-tank-bust": {
     title: "Bazaar NPC — Tank, Bust",
     note: "Dialogue framing for the boy in the blue tank top.",
   },
-  "game-characters/bazar-npc-bigframe2png": {
+  "game-characters/bazaar-npc-elder-bust": {
     title: "Bazaar NPC — Elder, Bust",
     note: "Dialogue framing for the older man in teal.",
   },
-  "game-characters/bazar-npc-bigframe3png": {
+  "game-characters/bazaar-npc-cap-bust": {
     title: "Bazaar NPC — Cap, Bust",
     note: "Dialogue framing for the boy in the topi.",
   },
-  "game-characters/illustration17": {
+  "game-characters/bazaar-boy": {
     title: "Bazaar Boy",
     note: "Portrait study of the market boy in his topi and olive kurta.",
   },
-  "game-characters/illustration21": {
+  "game-characters/jai-jai-store": {
     title: "Jai Jai Store",
     note: "A market stall prop with hand-painted Bengali signage and produce crates.",
   },
-  "game-characters/illustration24": {
+  "game-characters/umbrella-cart": {
     title: "Umbrella Cart",
     note: "A fruit cart under a striped umbrella, boxed produce stacked along the front.",
   },
-  "game-characters/illustration4": {
+  "game-characters/grocers-stall": {
     title: "Grocer's Stall",
     note: "The big stall: hanging bunches, gourds and melons under a red and white awning.",
   },
-  "game-characters/supermarket1": {
+  "game-characters/shop-clerk-long-hair": {
     title: "Shop Clerk — Long Hair",
     note: "Supermarket staff in an orange apron, full figure.",
   },
-  "game-characters/supermarket2": {
+  "game-characters/shop-clerk-bob": {
     title: "Shop Clerk — Bob",
     note: "A second supermarket clerk, same uniform, different cut.",
   },
-  "game-characters/supermarket-npc": {
+  "game-characters/shop-npc-glasses": {
     title: "Shop NPC — Glasses",
     note: "Supermarket NPC in orange overalls and round glasses.",
   },
-  "game-characters/supermart-bigframe": {
+  "game-characters/shop-clerk-bust": {
     title: "Shop Clerk — Bust",
     note: "Dialogue framing for the supermarket clerk.",
   },
-  "game-characters/sprite-0004": {
+  "game-characters/pixel-sprite": {
     title: "Pixel Sprite",
     note: "A pixel-art take on the character, built small enough to move in engine.",
   },
-  "game-characters/muhaha": {
+  "game-characters/blade-sprite": {
     title: "Blade Sprite",
     note: "Seven-frame pixel loop — a hooded figure drawing a blade.",
   },
-  "game-characters/blehh2": {
+  "game-characters/starstruck": {
     title: "Starstruck",
     note: "A painted portrait against a starred coral field. Sits with the game folder but is an illustration, not an asset.",
   },
 
-  "custom/brain": {
+  "custom/brainwave": {
     title: "Brainwave",
     note: "Cover art for a record that sounded like a pink pool in a green valley — taken literally.",
   },
@@ -190,43 +190,43 @@ const DETAILS: Record<string, Detail> = {
   },
 
   // -------------------------------------------------------------- portrait
-  "portrait/fish": {
+  "portrait/two-fish": {
     title: "Two Fish",
     note: "Two fish, two moods — one iridescent, one deep blue — painted for a print run about colour in cold water.",
   },
-  "portrait/new1-copy": {
+  "portrait/smoke": {
     title: "Smoke",
     note: "A woman in a blue and gold sari mid-drag, drawn against a flat coral ground.",
   },
-  "portrait/drimit": {
+  "portrait/cosmos": {
     title: "Cosmos",
     note: "A face split by colour — half lit in yellow and pink — against a starfield.",
   },
-  "portrait/cocoooo": {
+  "portrait/coco": {
     title: "Coco",
     note: "A black cat stretched out on grey, the working palette left in the margin.",
   },
 
   // ------------------------------------------------------------ my avatars
-  "my-avatars/tonniavatar": {
+  "my-avatars/tortilla": {
     title: "Tortilla",
     note: "Self portrait as a wide-eyed sketch with a mop of hair and star-tipped shoes.",
   },
 
   // ------------------------------------------------------------- wallpaper
-  "wallpaper/final111": {
+  "wallpaper/strike": {
     title: "Strike",
     note: "A crow lifting off the head of a struck match, its box open below.",
   },
-  "wallpaper/hbd": {
+  "wallpaper/nightie": {
     title: "Nightie",
     note: "Desktop wallpaper — a small character parked bottom-right on a black field, so icons still have room.",
   },
-  "wallpaper/nahinnn-1": {
+  "wallpaper/nahin": {
     title: "Nahin",
     note: "Desktop wallpaper — caped chibi on black, drawn to sit quietly behind a full desktop.",
   },
-  "wallpaper/phone-wallpaper": {
+  "wallpaper/dnd": {
     title: "DND",
     note: "Phone wallpaper — one character, one word, and a lot of black.",
   },

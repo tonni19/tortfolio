@@ -24,14 +24,27 @@ npm run lint
 
 ## Push to GitHub
 
+The repo already exists: **https://github.com/tonni19/tortfolio**
+
 ```bash
 git init
 git add -A
 git commit -m "Tortfolio"
-gh repo create tortfolio --private --source=. --push
+git branch -M main
+git remote add origin https://github.com/tonni19/tortfolio.git
+git push -u origin main
 ```
 
-`node_modules`, `.next` and `Categorized/` are gitignored.
+If that push is **rejected** because the repo already has a commit (a README
+created with it, say), pull that in first and push again:
+
+```bash
+git pull --rebase origin main
+git push -u origin main
+```
+
+`node_modules`, `.next` and `Categorized/` are gitignored, so they will not be
+pushed — that is intended.
 
 ## Deploy to Vercel
 
@@ -83,7 +96,8 @@ lib/works.ts    the six works in section 02, each pointing at a category
 lib/artworks.ts per-piece titles and notes  ← hand-written
 lib/media.generated.ts  GENERATED — do not edit
 scripts/build-media.mjs the pipeline
-public/art/legacy/      art from the original handoff that predates the pipeline
+(public/art/legacy/ is no longer used by any page and is excluded from
+ the repo; the originals are kept with the media masters)
 CLAUDE.md       design rules and the traps that have already bitten us
 ```
 
@@ -91,8 +105,12 @@ CLAUDE.md       design rules and the traps that have already bitten us
 
 - [ ] Real Behance/Tumblr URLs, or leave them out (currently Instagram only)
 - [ ] Confirm `hello@` address — currently `sadiatonni1916@gmail.com`
-- [ ] Set the real domain in `metadataBase` in `app/layout.tsx`
-      (currently `https://tortilla.art`)
+- [ ] Custom domain. The site works on the `*.vercel.app` URL, but a
+      commissions page reads better on a real domain. Link previews follow
+      the deployment automatically — `metadataBase` reads Vercel's host at
+      build time, so **nothing in the code needs changing** when a domain is
+      attached. To pin it explicitly, set `NEXT_PUBLIC_SITE_URL` in Vercel's
+      environment variables.
 - [ ] Artist to review the titles and notes in `lib/artworks.ts` — they are
       descriptive placeholders written from the artwork, not her words
 - [ ] Artist to sign off the Game Characters brief in `lib/works.ts`, drafted

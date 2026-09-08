@@ -1,45 +1,99 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { NAV_ITEMS } from "@/lib/works";
 
 /**
- * Fixed pill navbar, present on both the home page and detail pages.
- * On narrow screens the item list scrolls horizontally rather than
- * wrapping or collapsing into a menu — the pill keeps its shape.
+ * Pill navbar.
+ *
+ * On a phone the six items do not fit, and making the pill scroll sideways
+ * hid half the menu behind a gesture nobody knows is there. Below `md` the
+ * items collapse into a Menu button that opens a full-screen sheet with
+ * finger-sized rows instead.
  */
 export default function Nav() {
-  return (
-    <header
-      className="fixed top-[14px] left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[100px] bg-sage px-3 py-[9px] pl-5 sm:gap-[30px]"
-      style={{
-        border: "1px solid rgba(246,241,231,.24)",
-        boxShadow: "0 10px 30px rgba(42,39,35,.22)",
-        maxWidth: "calc(100% - 28px)",
-      }}
-    >
-      <Link
-        href="/"
-        className="font-display shrink-0 text-[19px] whitespace-nowrap text-cream uppercase hover:text-cream"
-        style={{ letterSpacing: ".07em" }}
-      >
-        Tortilla<span className="text-sage-light">°</span>
-      </Link>
+  const [open, setOpen] = useState(false);
 
-      <nav
-        aria-label="Sections"
-        className="flex items-center gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
+  return (
+    <>
+      <header
+        className="fixed top-[14px] left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[100px] bg-sage px-3 py-[9px] pl-5 md:gap-[30px]"
+        style={{
+          border: "1px solid rgba(246,241,231,.24)",
+          boxShadow: "0 10px 30px rgba(42,39,35,.22)",
+          maxWidth: "calc(100% - 28px)",
+        }}
       >
-        {NAV_ITEMS.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="font-mono flex shrink-0 items-baseline gap-[7px] rounded-[100px] px-[13px] py-2 text-[11px] whitespace-nowrap text-cream uppercase transition-[background-color,color] duration-250 hover:bg-cream hover:text-ink"
-            style={{ letterSpacing: ".14em" }}
-          >
-            <span className="text-[9px] opacity-50">{item.num}</span>
-            <span>{item.label}</span>
-          </Link>
-        ))}
-      </nav>
-    </header>
+        <Link
+          href="/"
+          className="nav-logo font-display shrink-0 text-[19px] whitespace-nowrap text-cream uppercase hover:text-cream"
+          style={{ letterSpacing: ".07em" }}
+          onClick={() => setOpen(false)}
+        >
+          Tortilla<span className="text-sage-light">°</span>
+        </Link>
+
+        {/* Desktop: the full set inline. */}
+        <nav aria-label="Sections" className="hidden items-center gap-1 md:flex">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="nav-link font-mono flex shrink-0 items-baseline gap-[7px] rounded-[100px] px-[13px] py-2 text-[11px] whitespace-nowrap text-cream uppercase transition-[background-color,color] duration-250 hover:bg-cream hover:text-ink"
+              style={{ letterSpacing: ".14em" }}
+            >
+              <span className="text-[9px] opacity-50">{item.num}</span>
+              <span>{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* Phone: one button, no hidden sideways scroll. */}
+        <button
+          type="button"
+          className="nav-toggle font-mono md:hidden"
+          aria-expanded={open}
+          aria-controls="nav-sheet"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? "Close" : "Menu"}
+        </button>
+      </header>
+
+      <div
+        id="nav-sheet"
+        className={`nav-sheet${open ? " is-open" : ""}`}
+        hidden={!open}
+      >
+        <nav aria-label="Sections">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="nav-sheet-link"
+              onClick={() => setOpen(false)}
+            >
+              <span className="font-mono nav-sheet-num">{item.num}</span>
+              <span className="font-display nav-sheet-label">{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </>
   );
 }

@@ -26,8 +26,26 @@ const jetBrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+/**
+ * Absolute base for OG/Twitter image URLs. Those must be absolute, and if the
+ * base does not match where the site is actually served, Instagram, Discord
+ * and iMessage will fail to render the preview image.
+ *
+ * Vercel supplies the real host at build time, so this follows the deployment
+ * automatically: a preview URL, the *.vercel.app production URL, or a custom
+ * domain once one is attached — no code change needed. Set
+ * NEXT_PUBLIC_SITE_URL to override it explicitly.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tortilla.art"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Tortilla — 2D Digital Artist & Illustrator",
     template: "%s — Tortilla",
@@ -51,14 +69,14 @@ export const metadata: Metadata = {
     description:
       "Character design, illustration and sequential art. Characters that refuse to sit still.",
     images: [
-      { url: "/art/wallpaper/final111.webp", width: 1800, height: 1800, alt: "Tortilla" },
+      { url: "/art/wallpaper/strike.webp", width: 1800, height: 1800, alt: "Tortilla" },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tortilla — 2D Digital Artist & Illustrator",
     description: "Character design, illustration and sequential art.",
-    images: ["/art/wallpaper/final111.webp"],
+    images: ["/art/wallpaper/strike.webp"],
   },
 };
 

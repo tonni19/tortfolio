@@ -77,7 +77,7 @@ export default async function ArtPage(
       <div className="mx-auto max-w-[1500px] px-7">
         <Link
           href={work ? `/work/${work.slug}` : "/#works"}
-          className="font-mono mb-[34px] inline-flex items-center gap-[9px] text-[10px] text-ink opacity-60 hover:opacity-100"
+          className="tap-link font-mono mb-[34px] inline-flex items-center gap-[9px] text-[10px] text-ink opacity-60 hover:opacity-100"
           style={{ letterSpacing: ".2em" }}
         >
           <span aria-hidden>←</span> {work ? work.title.toUpperCase() : "ALL WORK"}
@@ -133,7 +133,7 @@ export default async function ArtPage(
             {work ? (
               <Link
                 href={`/work/${work.slug}`}
-                className="font-mono text-[10px] text-ink opacity-55 hover:opacity-100"
+                className="tap-link font-mono text-[10px] text-ink opacity-55 hover:opacity-100"
                 style={{ letterSpacing: ".16em" }}
               >
                 SEE ALL ↗

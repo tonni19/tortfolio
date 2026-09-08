@@ -25,60 +25,60 @@ export type MediaItem = {
 
 export const MEDIA: readonly MediaItem[] = [
   {
-    "id": "animation/animationn",
+    "id": "animation/late-for-8-am",
     "category": "animation",
-    "slug": "animationn",
+    "slug": "late-for-8-am",
     "kind": "video",
-    "src": "/art/animation/animationn.mp4",
-    "poster": "/art/animation/animationn-poster.webp",
-    "width": 608,
-    "height": 1080
-  },
-  {
-    "id": "animation/dooooorr1",
-    "category": "animation",
-    "slug": "dooooorr1",
-    "kind": "video",
-    "src": "/art/animation/dooooorr1.mp4",
-    "poster": "/art/animation/dooooorr1-poster.webp",
-    "width": 608,
-    "height": 1080
-  },
-  {
-    "id": "animation/kirbyyy",
-    "category": "animation",
-    "slug": "kirbyyy",
-    "kind": "video",
-    "src": "/art/animation/kirbyyy.mp4",
-    "poster": "/art/animation/kirbyyy-poster.webp",
+    "src": "/art/animation/late-for-8-am.mp4",
+    "poster": "/art/animation/late-for-8-am-poster.webp",
     "width": 1080,
     "height": 608
   },
   {
-    "id": "animation/qweqeqeqeqe",
+    "id": "animation/still-more",
     "category": "animation",
-    "slug": "qweqeqeqeqe",
+    "slug": "still-more",
     "kind": "video",
-    "src": "/art/animation/qweqeqeqeqe.mp4",
-    "poster": "/art/animation/qweqeqeqeqe-poster.webp",
+    "src": "/art/animation/still-more.mp4",
+    "poster": "/art/animation/still-more-poster.webp",
     "width": 608,
     "height": 1080
   },
   {
-    "id": "comic/your-paragraph-text",
+    "id": "animation/sunburst",
+    "category": "animation",
+    "slug": "sunburst",
+    "kind": "video",
+    "src": "/art/animation/sunburst.mp4",
+    "poster": "/art/animation/sunburst-poster.webp",
+    "width": 608,
+    "height": 1080
+  },
+  {
+    "id": "animation/the-hut",
+    "category": "animation",
+    "slug": "the-hut",
+    "kind": "video",
+    "src": "/art/animation/the-hut.mp4",
+    "poster": "/art/animation/the-hut-poster.webp",
+    "width": 608,
+    "height": 1080
+  },
+  {
+    "id": "comic/we-stay-prepared",
     "category": "comic",
-    "slug": "your-paragraph-text",
+    "slug": "we-stay-prepared",
     "kind": "image",
-    "src": "/art/comic/your-paragraph-text.webp",
+    "src": "/art/comic/we-stay-prepared.webp",
     "width": 1760,
     "height": 2200
   },
   {
-    "id": "comic/ants-01-document-0",
+    "id": "comic/ants-01-the-anthill",
     "category": "comic",
-    "slug": "ants-01-document-0",
+    "slug": "ants-01-the-anthill",
     "kind": "image",
-    "src": "/art/comic/ants-01-document-0.webp",
+    "src": "/art/comic/ants-01-the-anthill.webp",
     "series": "ants",
     "seriesName": "ants",
     "order": 1,
@@ -86,11 +86,11 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 720
   },
   {
-    "id": "comic/ants-02-document-1",
+    "id": "comic/ants-02-impact",
     "category": "comic",
-    "slug": "ants-02-document-1",
+    "slug": "ants-02-impact",
     "kind": "image",
-    "src": "/art/comic/ants-02-document-1.webp",
+    "src": "/art/comic/ants-02-impact.webp",
     "series": "ants",
     "seriesName": "ants",
     "order": 2,
@@ -98,11 +98,11 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 720
   },
   {
-    "id": "comic/ants-03-ending-scene1",
+    "id": "comic/ants-03-the-colony",
     "category": "comic",
-    "slug": "ants-03-ending-scene1",
+    "slug": "ants-03-the-colony",
     "kind": "image",
-    "src": "/art/comic/ants-03-ending-scene1.webp",
+    "src": "/art/comic/ants-03-the-colony.webp",
     "series": "ants",
     "seriesName": "ants",
     "order": 3,
@@ -110,11 +110,11 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 720
   },
   {
-    "id": "comic/ants-04-ending-page-22",
+    "id": "comic/ants-04-ward",
     "category": "comic",
-    "slug": "ants-04-ending-page-22",
+    "slug": "ants-04-ward",
     "kind": "image",
-    "src": "/art/comic/ants-04-ending-page-22.webp",
+    "src": "/art/comic/ants-04-ward.webp",
     "series": "ants",
     "seriesName": "ants",
     "order": 4,
@@ -122,11 +122,11 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 720
   },
   {
-    "id": "comic/ants-05-ending-page-23",
+    "id": "comic/ants-05-ants",
     "category": "comic",
-    "slug": "ants-05-ending-page-23",
+    "slug": "ants-05-ants",
     "kind": "image",
-    "src": "/art/comic/ants-05-ending-page-23.webp",
+    "src": "/art/comic/ants-05-ants.webp",
     "series": "ants",
     "seriesName": "ants",
     "order": 5,
@@ -134,47 +134,29 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 720
   },
   {
-    "id": "custom/back",
+    "id": "custom/brainwave",
     "category": "custom",
-    "slug": "back",
+    "slug": "brainwave",
     "kind": "image",
-    "src": "/art/custom/back.webp",
-    "width": 1833,
-    "height": 2200
-  },
-  {
-    "id": "custom/binn",
-    "category": "custom",
-    "slug": "binn",
-    "kind": "image",
-    "src": "/art/custom/binn.webp",
-    "width": 1555,
-    "height": 2200
-  },
-  {
-    "id": "custom/brain",
-    "category": "custom",
-    "slug": "brain",
-    "kind": "image",
-    "src": "/art/custom/brain.webp",
+    "src": "/art/custom/brainwave.webp",
     "width": 1060,
     "height": 1500
   },
   {
-    "id": "custom/document-2",
+    "id": "custom/car-14-livery",
     "category": "custom",
-    "slug": "document-2",
+    "slug": "car-14-livery",
     "kind": "image",
-    "src": "/art/custom/document-2.webp",
-    "width": 1080,
-    "height": 1920
+    "src": "/art/custom/car-14-livery.webp",
+    "width": 1833,
+    "height": 2200
   },
   {
-    "id": "custom/front-1",
+    "id": "custom/cat-nap",
     "category": "custom",
-    "slug": "front-1",
+    "slug": "cat-nap",
     "kind": "image",
-    "src": "/art/custom/front-1.webp",
+    "src": "/art/custom/cat-nap.webp",
     "width": 1833,
     "height": 2200
   },
@@ -188,293 +170,311 @@ export const MEDIA: readonly MediaItem[] = [
     "height": 1500
   },
   {
-    "id": "custom/logo-final-istg-nimbu",
+    "id": "custom/mayer-doa-studio",
     "category": "custom",
-    "slug": "logo-final-istg-nimbu",
+    "slug": "mayer-doa-studio",
     "kind": "image",
-    "src": "/art/custom/logo-final-istg-nimbu.webp",
+    "src": "/art/custom/mayer-doa-studio.webp",
     "width": 1555,
     "height": 2200
   },
   {
-    "id": "custom/logoo2",
+    "id": "custom/nimbu",
     "category": "custom",
-    "slug": "logoo2",
+    "slug": "nimbu",
     "kind": "image",
-    "src": "/art/custom/logoo2.webp",
+    "src": "/art/custom/nimbu.webp",
     "width": 1555,
     "height": 2200
   },
   {
-    "id": "game-characters/bazar-npc",
-    "category": "game-characters",
-    "slug": "bazar-npc",
+    "id": "custom/rickshaw",
+    "category": "custom",
+    "slug": "rickshaw",
     "kind": "image",
-    "src": "/art/game-characters/bazar-npc.webp",
-    "width": 512,
-    "height": 512
-  },
-  {
-    "id": "game-characters/bazar-npc-bigframe",
-    "category": "game-characters",
-    "slug": "bazar-npc-bigframe",
-    "kind": "image",
-    "src": "/art/game-characters/bazar-npc-bigframe.webp",
-    "width": 512,
-    "height": 512
-  },
-  {
-    "id": "game-characters/bazar-npc-bigframe2png",
-    "category": "game-characters",
-    "slug": "bazar-npc-bigframe2png",
-    "kind": "image",
-    "src": "/art/game-characters/bazar-npc-bigframe2png.webp",
-    "width": 512,
-    "height": 512
-  },
-  {
-    "id": "game-characters/bazar-npc-bigframe3png",
-    "category": "game-characters",
-    "slug": "bazar-npc-bigframe3png",
-    "kind": "image",
-    "src": "/art/game-characters/bazar-npc-bigframe3png.webp",
-    "width": 512,
-    "height": 512
-  },
-  {
-    "id": "game-characters/bazar-npc2",
-    "category": "game-characters",
-    "slug": "bazar-npc2",
-    "kind": "image",
-    "src": "/art/game-characters/bazar-npc2.webp",
-    "width": 512,
-    "height": 512
-  },
-  {
-    "id": "game-characters/bazar-npc3",
-    "category": "game-characters",
-    "slug": "bazar-npc3",
-    "kind": "image",
-    "src": "/art/game-characters/bazar-npc3.webp",
-    "width": 512,
-    "height": 512
-  },
-  {
-    "id": "game-characters/blehh2",
-    "category": "game-characters",
-    "slug": "blehh2",
-    "kind": "image",
-    "src": "/art/game-characters/blehh2.webp",
-    "width": 1555,
-    "height": 2200
-  },
-  {
-    "id": "game-characters/drmtwork",
-    "category": "game-characters",
-    "slug": "drmtwork",
-    "kind": "image",
-    "src": "/art/game-characters/drmtwork.webp",
+    "src": "/art/custom/rickshaw.webp",
     "width": 1080,
     "height": 1920
   },
   {
-    "id": "game-characters/fff",
-    "category": "game-characters",
-    "slug": "fff",
+    "id": "custom/sorting-unit",
+    "category": "custom",
+    "slug": "sorting-unit",
     "kind": "image",
-    "src": "/art/game-characters/fff.webp",
-    "width": 1080,
-    "height": 1920
+    "src": "/art/custom/sorting-unit.webp",
+    "width": 1555,
+    "height": 2200
   },
   {
-    "id": "game-characters/illustration17",
+    "id": "game-characters/bazaar-boy",
     "category": "game-characters",
-    "slug": "illustration17",
+    "slug": "bazaar-boy",
     "kind": "image",
-    "src": "/art/game-characters/illustration17.webp",
+    "src": "/art/game-characters/bazaar-boy.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/illustration21",
+    "id": "game-characters/bazaar-npc-cap",
     "category": "game-characters",
-    "slug": "illustration21",
+    "slug": "bazaar-npc-cap",
     "kind": "image",
-    "src": "/art/game-characters/illustration21.webp",
+    "src": "/art/game-characters/bazaar-npc-cap.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/illustration24",
+    "id": "game-characters/bazaar-npc-cap-bust",
     "category": "game-characters",
-    "slug": "illustration24",
+    "slug": "bazaar-npc-cap-bust",
     "kind": "image",
-    "src": "/art/game-characters/illustration24.webp",
+    "src": "/art/game-characters/bazaar-npc-cap-bust.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/illustration4",
+    "id": "game-characters/bazaar-npc-elder",
     "category": "game-characters",
-    "slug": "illustration4",
+    "slug": "bazaar-npc-elder",
     "kind": "image",
-    "src": "/art/game-characters/illustration4.webp",
+    "src": "/art/game-characters/bazaar-npc-elder.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/main-charac-bigframe",
+    "id": "game-characters/bazaar-npc-elder-bust",
     "category": "game-characters",
-    "slug": "main-charac-bigframe",
+    "slug": "bazaar-npc-elder-bust",
     "kind": "image",
-    "src": "/art/game-characters/main-charac-bigframe.webp",
+    "src": "/art/game-characters/bazaar-npc-elder-bust.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/main-charac-front",
+    "id": "game-characters/bazaar-npc-tank",
     "category": "game-characters",
-    "slug": "main-charac-front",
+    "slug": "bazaar-npc-tank",
     "kind": "image",
-    "src": "/art/game-characters/main-charac-front.webp",
+    "src": "/art/game-characters/bazaar-npc-tank.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/muhaha",
+    "id": "game-characters/bazaar-npc-tank-bust",
     "category": "game-characters",
-    "slug": "muhaha",
+    "slug": "bazaar-npc-tank-bust",
+    "kind": "image",
+    "src": "/art/game-characters/bazaar-npc-tank-bust.webp",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "id": "game-characters/blade-sprite",
+    "category": "game-characters",
+    "slug": "blade-sprite",
     "kind": "gif",
-    "src": "/art/game-characters/muhaha.gif",
-    "poster": "/art/game-characters/muhaha-poster.webp",
+    "src": "/art/game-characters/blade-sprite.gif",
+    "poster": "/art/game-characters/blade-sprite-poster.webp",
     "width": 640,
     "height": 640
   },
   {
-    "id": "game-characters/sprite-0004",
+    "id": "game-characters/grocers-stall",
     "category": "game-characters",
-    "slug": "sprite-0004",
+    "slug": "grocers-stall",
     "kind": "image",
-    "src": "/art/game-characters/sprite-0004.webp",
+    "src": "/art/game-characters/grocers-stall.webp",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "id": "game-characters/jai-jai-store",
+    "category": "game-characters",
+    "slug": "jai-jai-store",
+    "kind": "image",
+    "src": "/art/game-characters/jai-jai-store.webp",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "id": "game-characters/lead-bust",
+    "category": "game-characters",
+    "slug": "lead-bust",
+    "kind": "image",
+    "src": "/art/game-characters/lead-bust.webp",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "id": "game-characters/lead-front",
+    "category": "game-characters",
+    "slug": "lead-front",
+    "kind": "image",
+    "src": "/art/game-characters/lead-front.webp",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "id": "game-characters/model-sheet",
+    "category": "game-characters",
+    "slug": "model-sheet",
+    "kind": "image",
+    "src": "/art/game-characters/model-sheet.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "game-characters/pixel-sprite",
+    "category": "game-characters",
+    "slug": "pixel-sprite",
+    "kind": "image",
+    "src": "/art/game-characters/pixel-sprite.webp",
     "width": 640,
     "height": 640
   },
   {
-    "id": "game-characters/supermarket-npc",
+    "id": "game-characters/shop-clerk-bob",
     "category": "game-characters",
-    "slug": "supermarket-npc",
+    "slug": "shop-clerk-bob",
     "kind": "image",
-    "src": "/art/game-characters/supermarket-npc.webp",
+    "src": "/art/game-characters/shop-clerk-bob.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/supermarket1",
+    "id": "game-characters/shop-clerk-bust",
     "category": "game-characters",
-    "slug": "supermarket1",
+    "slug": "shop-clerk-bust",
     "kind": "image",
-    "src": "/art/game-characters/supermarket1.webp",
+    "src": "/art/game-characters/shop-clerk-bust.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/supermarket2",
+    "id": "game-characters/shop-clerk-long-hair",
     "category": "game-characters",
-    "slug": "supermarket2",
+    "slug": "shop-clerk-long-hair",
     "kind": "image",
-    "src": "/art/game-characters/supermarket2.webp",
+    "src": "/art/game-characters/shop-clerk-long-hair.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "game-characters/supermart-bigframe",
+    "id": "game-characters/shop-npc-glasses",
     "category": "game-characters",
-    "slug": "supermart-bigframe",
+    "slug": "shop-npc-glasses",
     "kind": "image",
-    "src": "/art/game-characters/supermart-bigframe.webp",
+    "src": "/art/game-characters/shop-npc-glasses.webp",
     "width": 512,
     "height": 512
   },
   {
-    "id": "my-avatars/tonniavatar",
+    "id": "game-characters/spearbearer",
+    "category": "game-characters",
+    "slug": "spearbearer",
+    "kind": "image",
+    "src": "/art/game-characters/spearbearer.webp",
+    "width": 1080,
+    "height": 1920
+  },
+  {
+    "id": "game-characters/starstruck",
+    "category": "game-characters",
+    "slug": "starstruck",
+    "kind": "image",
+    "src": "/art/game-characters/starstruck.webp",
+    "width": 1555,
+    "height": 2200
+  },
+  {
+    "id": "game-characters/umbrella-cart",
+    "category": "game-characters",
+    "slug": "umbrella-cart",
+    "kind": "image",
+    "src": "/art/game-characters/umbrella-cart.webp",
+    "width": 512,
+    "height": 512
+  },
+  {
+    "id": "my-avatars/tortilla",
     "category": "my-avatars",
-    "slug": "tonniavatar",
+    "slug": "tortilla",
     "kind": "image",
-    "src": "/art/my-avatars/tonniavatar.webp",
+    "src": "/art/my-avatars/tortilla.webp",
     "width": 1080,
     "height": 1350
   },
   {
-    "id": "portrait/cocoooo",
+    "id": "portrait/coco",
     "category": "portrait",
-    "slug": "cocoooo",
+    "slug": "coco",
     "kind": "image",
-    "src": "/art/portrait/cocoooo.webp",
+    "src": "/art/portrait/coco.webp",
     "width": 627,
     "height": 575
   },
   {
-    "id": "portrait/drimit",
+    "id": "portrait/cosmos",
     "category": "portrait",
-    "slug": "drimit",
+    "slug": "cosmos",
     "kind": "image",
-    "src": "/art/portrait/drimit.webp",
+    "src": "/art/portrait/cosmos.webp",
     "width": 2200,
     "height": 2200
   },
   {
-    "id": "portrait/fish",
+    "id": "portrait/smoke",
     "category": "portrait",
-    "slug": "fish",
+    "slug": "smoke",
     "kind": "image",
-    "src": "/art/portrait/fish.webp",
-    "width": 1500,
-    "height": 1075
-  },
-  {
-    "id": "portrait/new1-copy",
-    "category": "portrait",
-    "slug": "new1-copy",
-    "kind": "image",
-    "src": "/art/portrait/new1-copy.webp",
+    "src": "/art/portrait/smoke.webp",
     "width": 1555,
     "height": 2200
   },
   {
-    "id": "wallpaper/final111",
-    "category": "wallpaper",
-    "slug": "final111",
+    "id": "portrait/two-fish",
+    "category": "portrait",
+    "slug": "two-fish",
     "kind": "image",
-    "src": "/art/wallpaper/final111.webp",
-    "width": 1800,
-    "height": 1800
+    "src": "/art/portrait/two-fish.webp",
+    "width": 1500,
+    "height": 1075
   },
   {
-    "id": "wallpaper/hbd",
+    "id": "wallpaper/dnd",
     "category": "wallpaper",
-    "slug": "hbd",
+    "slug": "dnd",
     "kind": "image",
-    "src": "/art/wallpaper/hbd.webp",
-    "width": 1920,
-    "height": 1080
-  },
-  {
-    "id": "wallpaper/nahinnn-1",
-    "category": "wallpaper",
-    "slug": "nahinnn-1",
-    "kind": "image",
-    "src": "/art/wallpaper/nahinnn-1.webp",
-    "width": 1920,
-    "height": 1080
-  },
-  {
-    "id": "wallpaper/phone-wallpaper",
-    "category": "wallpaper",
-    "slug": "phone-wallpaper",
-    "kind": "image",
-    "src": "/art/wallpaper/phone-wallpaper.webp",
+    "src": "/art/wallpaper/dnd.webp",
     "width": 750,
     "height": 1334
+  },
+  {
+    "id": "wallpaper/nahin",
+    "category": "wallpaper",
+    "slug": "nahin",
+    "kind": "image",
+    "src": "/art/wallpaper/nahin.webp",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "id": "wallpaper/nightie",
+    "category": "wallpaper",
+    "slug": "nightie",
+    "kind": "image",
+    "src": "/art/wallpaper/nightie.webp",
+    "width": 1920,
+    "height": 1080
+  },
+  {
+    "id": "wallpaper/strike",
+    "category": "wallpaper",
+    "slug": "strike",
+    "kind": "image",
+    "src": "/art/wallpaper/strike.webp",
+    "width": 1800,
+    "height": 1800
   }
 ];
 

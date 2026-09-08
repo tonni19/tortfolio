@@ -22,6 +22,14 @@ It writes optimised files to `public/art/<category>/` and regenerates
 - A work in `lib/works.ts` points at a `category`, so uploading a file puts it
   on the site with no code change.
 
+## Small screens get their own layout, not a squeezed one
+Below `md` the nav collapses into a full-screen sheet, the hero becomes a
+2x2+1 grid showing all five works at once, and the loop shelf becomes a
+2-column grid. Horizontal scroll rails were tried and rejected: they hide
+content behind a gesture nobody knows is there. Only the marquees scroll
+sideways, because they animate on their own. Every control has a 44px hit
+area on a coarse pointer.
+
 ## Design rules
 - Palette is exactly: cream `#f6f1e7`, ink `#2a2723`, sage `#41705f`, plus bone `#e6dccb` / `#ece4d6` for media frames and hover fills. Max two background colors per screen. Do not introduce new colors or gradients.
 - Fonts: Anton (display), Space Grotesk (body), JetBrains Mono (labels/meta, always uppercase with wide letter-spacing).

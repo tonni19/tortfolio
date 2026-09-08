@@ -53,7 +53,7 @@ export default async function ComicSeries(
       <div className="mx-auto max-w-[1500px] px-7">
         <Link
           href="/work/comic"
-          className="font-mono mb-[34px] inline-flex items-center gap-[9px] text-[10px] text-ink opacity-60 hover:opacity-100"
+          className="tap-link font-mono mb-[34px] inline-flex items-center gap-[9px] text-[10px] text-ink opacity-60 hover:opacity-100"
           style={{ letterSpacing: ".2em" }}
         >
           <span aria-hidden>←</span> ALL COMICS

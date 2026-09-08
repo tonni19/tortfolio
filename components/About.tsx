@@ -45,10 +45,10 @@ export default function About() {
 
       <Reveal className="relative">
         <Image
-          src={media("my-avatars/tonniavatar").src}
+          src={media("my-avatars/tortilla").src}
           alt="Tortilla, drawn by herself"
-          width={media("my-avatars/tonniavatar").width}
-          height={media("my-avatars/tonniavatar").height}
+          width={media("my-avatars/tortilla").width}
+          height={media("my-avatars/tortilla").height}
           sizes="(max-width: 1023px) 100vw, 40vw"
           className="block h-auto w-full rounded-[4px]"
         />

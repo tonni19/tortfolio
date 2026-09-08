@@ -5,8 +5,6 @@ import { notFound } from "next/navigation";
 import ArtGallery from "@/components/ArtGallery";
 import { SERIES_DETAILS, allSeries, standaloneIn } from "@/lib/artworks";
 import {
-  ART,
-  DETAIL_FRAMES,
   DETAIL_PROCESS_NOTE,
   WORKS,
   coverOf,
@@ -64,7 +62,7 @@ export default async function WorkDetail(props: PageProps<"/work/[slug]">) {
       <div className="mx-auto max-w-[1500px] px-7">
         <Link
           href="/#works"
-          className="font-mono mb-[34px] inline-flex items-center gap-[9px] text-[10px] text-ink opacity-60 hover:opacity-100"
+          className="tap-link font-mono mb-[34px] inline-flex items-center gap-[9px] text-[10px] text-ink opacity-60 hover:opacity-100"
           style={{ letterSpacing: ".2em" }}
         >
           <span aria-hidden>←</span> BACK TO INDEX
@@ -117,45 +115,17 @@ export default async function WorkDetail(props: PageProps<"/work/[slug]">) {
           <p className="prose-body m-0 max-w-none">{DETAIL_PROCESS_NOTE}</p>
         </div>
 
-        {total ? (
-          <div className="flex flex-col gap-[14px] self-start">
-            <h2 className="eyebrow m-0">IN THIS SET</h2>
-            <p
-              className="m-0 text-[15px] opacity-60"
-              style={{ lineHeight: 1.6, textWrap: "pretty" }}
-            >
-              {sets.length
-                ? `${sets.length} series and ${pieces.length} standalone ${pieces.length === 1 ? "piece" : "pieces"}. Open a series to read it in order.`
-                : `${total} pieces, each with its own page.`}
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-3 content-start gap-[10px]">
-            {DETAIL_FRAMES.map((key, i) => {
-              const frame = ART[key];
-              return (
-                <div
-                  key={key}
-                  className="frame-thumb relative aspect-[3/4] overflow-hidden rounded-[3px] bg-bone-hover"
-                >
-                  <Image
-                    src={frame.src}
-                    alt=""
-                    fill
-                    sizes="(max-width: 1023px) 30vw, 18vw"
-                    className="object-cover"
-                  />
-                  <span
-                    className="font-mono absolute top-2 left-2 text-[9px] opacity-70"
-                    style={{ letterSpacing: ".14em" }}
-                  >
-                    F{String(i * 4 + 1).padStart(3, "0")}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        <div className="flex flex-col gap-[14px] self-start">
+          <h2 className="eyebrow m-0">IN THIS SET</h2>
+          <p
+            className="m-0 text-[15px] opacity-60"
+            style={{ lineHeight: 1.6, textWrap: "pretty" }}
+          >
+            {sets.length
+              ? `${sets.length} series and ${pieces.length} standalone ${pieces.length === 1 ? "piece" : "pieces"}. Open a series to read it in order.`
+              : `${total} pieces, each with its own page.`}
+          </p>
+        </div>
       </div>
 
       {/* Series read as comics; open one to page through it in order. */}

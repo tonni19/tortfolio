@@ -26,10 +26,13 @@ export default function Contact() {
         className="font-mono mt-11 flex flex-wrap justify-center gap-[30px] text-[11px]"
         style={{ letterSpacing: ".18em" }}
       >
-        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL.toUpperCase()}</a>
+        <a className="tap-link" href={`mailto:${CONTACT_EMAIL}`}>
+          {CONTACT_EMAIL.toUpperCase()}
+        </a>
         {SOCIAL_LINKS.map((link) => (
           <a
             key={link.label}
+            className="tap-link"
             href={link.href}
             target="_blank"
             rel="noreferrer noopener"
