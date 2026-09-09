@@ -17,21 +17,21 @@ export default function About() {
             className="font-display m-0 mb-[30px] text-[clamp(38px,4.4vw,74px)]"
             style={{ lineHeight: 1.02, textWrap: "balance" }}
           >
-            Hi, I&apos;m Tortilla — a 2D digital artist and illustrator making
-            characters that refuse to sit still.
+            Hi, I&apos;m Tortilla. I&apos;m a 2D digital artist and
+            illustrator, and I draw characters that don&apos;t sit still.
           </h2>
         </Reveal>
 
         <p className="prose-body m-0 mb-[18px]">
-          I draw people, animals and the odd sentient matchstick — character
-          design and turnarounds, sprites and tilesets, UI and icon art, comic
-          pages. Most of it starts as a scribble in a sketchbook and ends as a
-          finished asset, coloured loud and drawn with a bit of a swagger.
+          I draw people, animals and the occasional talking matchstick.
+          Character design and turnarounds, sprites and tilesets, UI and icon
+          art, comic pages. Most of it starts as a scribble in a sketchbook and
+          ends up as a finished asset.
         </p>
         <p className="prose-body m-0 mb-[34px]">
-          Commissions, character sheets, game art, comics. I work in whatever the
-          brief calls for — line art, painted, vector or pixel — and every final
-          ships with its layered source file.
+          Commissions, character sheets, game art, comics. I work in whatever
+          style the brief needs, whether that is line art, painted, vector or
+          pixel. Every final comes with its layered source file.
         </p>
 
         <Link
@@ -56,7 +56,7 @@ export default function About() {
         <div
           className="bob absolute -top-[26px] -right-[14px] flex size-[104px] items-center justify-center rounded-full bg-sage"
           style={{
-            border: "1px solid rgba(246,241,231,.3)",
+            border: "1px solid var(--pill-line-strong)",
             animation: "t-bob 5s ease-in-out infinite",
           }}
         >

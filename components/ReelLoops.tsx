@@ -301,7 +301,7 @@ export default function ReelLoops() {
                       {
                         border: isFeatured
                           ? "2px solid var(--color-sage)"
-                          : "1px solid rgba(42,39,35,.18)",
+                          : "1px solid var(--hairline-strong)",
                         "--loop-ratio": ratio,
                       } as CSSProperties
                     }
@@ -348,10 +348,10 @@ export default function ReelLoops() {
                         letterSpacing: ".16em",
                         background: isFeatured
                           ? "var(--color-sage)"
-                          : "rgba(246,241,231,.9)",
+                          : "var(--chip-bg)",
                         color: isFeatured
                           ? "var(--color-cream)"
-                          : "var(--color-ink)",
+                          : "var(--chip-fg)",
                       }}
                     >
                       {isFeatured ? "IN PLAYER" : "PLAY"}

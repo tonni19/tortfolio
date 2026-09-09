@@ -64,7 +64,7 @@ export default function WorkIndex() {
           className="font-mono text-[10px] opacity-40"
           style={{ letterSpacing: ".18em" }}
         >
-          2021 — 2026
+          2021 / 2026
         </span>
       </div>
 

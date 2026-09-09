@@ -20,6 +20,7 @@ npm run dev      # http://localhost:3000
 | `npm run build` | production build |
 | `npm run media` | rebuild images and video from `Categorized/` |
 | `npm run lint` | eslint |
+| `npm run favicon` | rebuild the site icons from the avatar master |
 
 > Never run `npm run build` while `npm run dev` is running — they share `.next`
 > and it corrupts into 500s on every route. Stop both, delete `.next`, restart.
@@ -35,13 +36,16 @@ app/                 routes
   work/[slug]/         one page per category
   art/[category]/[slug]/   one page per artwork
   comic/[series]/      vertical comic reader
-components/          UI — Hero, ReelLoops (player), Lightbox (zoom viewer), …
+components/          UI — Hero, ReelLoops (player), Lightbox (zoom viewer),
+                       ThemeToggle (day/night), …
 lib/
   works.ts             the six works in section 02
   artworks.ts          per-piece titles and notes  ← hand-written
   media.generated.ts   GENERATED, do not edit
+  theme.ts             the two themes and the pre-paint init script
 scripts/
   build-media.mjs      the media pipeline
+  make-favicon.mjs     favicon.ico / icon.png / apple-icon.png
 Categorized/         master artwork — the source of truth (not in the repo)
 CLAUDE.md            design rules and the traps already hit
 reference/           the original design brief and prototype, for history
@@ -73,6 +77,11 @@ archive. You only need it to run `npm run media`.
 
 ## Notes
 
+- **Day and night themes**, switched from the dial in the nav pill. A first
+  visit follows the operating system; after that the choice is remembered.
+  Both themes are the same set of design tokens with different values, so
+  there is no second stylesheet to keep in sync — see the theme section in
+  [CLAUDE.md](CLAUDE.md) before adding a colour anywhere.
 - Everything is muted by default. The reel is the one exception — it carries a
   sound toggle, because some clips have a track.
 - Small screens get their own layout, not a squeezed one: the nav collapses to

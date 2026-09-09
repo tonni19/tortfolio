@@ -30,6 +30,51 @@ content behind a gesture nobody knows is there. Only the marquees scroll
 sideways, because they animate on their own. Every control has a 44px hit
 area on a coarse pointer.
 
+## Two themes, one set of token names
+Day and night, switched from the nav pill (`ThemeToggle`) and stored in
+`localStorage`. `data-theme` on `<html>` is the only switch; the inline
+script in `app/layout.tsx` writes it before first paint, seeded from
+`prefers-color-scheme`, so there is no flash and no `prefers-color-scheme`
+fallback in the CSS.
+
+The token names are **roles, not colours**. `--color-cream` means "the page"
+and is a plum-black at night; `--color-ink` means "the text on the page" and
+is warm paper at night. That is why `bg-cream`, `text-ink` and every
+`bg-sage`/`text-cream` pairing flip on their own, and why adding a dark theme
+touched almost no components.
+
+- Never write a raw colour in a component. If a value needs to differ per
+  theme it is a token in `:root` + `:root[data-theme="dark"]`.
+- Three tokens deliberately never flip, because they sit on artwork or in the
+  always-dark lightbox where "light" is a fact about the surface, not a
+  theme: `--color-panel-ink`, `--color-on-media`, `--color-accent-fixed`.
+  **Text over a photo uses `text-on-media`, not `text-cream`** — `text-cream`
+  is the page colour and goes black at night.
+- The accent brightens at night (`#b0305a` → `#ef6f95`) because Deep Rose is
+  3.2:1 on the dark ground and the eyebrows it colours are 10px. Both themes
+  clear 4.5:1 on every pairing; the audit is in the scratchpad harness.
+- Surfaces that are dark *on purpose* rather than dark *by theme* use
+  `--matte` (reel stage), `--chip-bg`/`--chip-fg` (labels on artwork) and
+  `--nav-sheet-bg` (the phone menu — flipping it with the accent made it a
+  full-bleed hot pink at night).
+- The flip animates as a circular wipe from the toggle via the View
+  Transitions API. No API, or reduced motion, and it simply changes.
+- **Nothing may change size between themes.** The old-and-new snapshots of a
+  view transition are overlaid, so any layout difference shows up as text
+  ghosting at the wipe edge. The toggle's `DAY`/`NIGHT` label caught this:
+  `NIGHT` is 15px wider, and because the nav pill is centred that width
+  landed as a 7.6px sideways jump on every link in the nav. Both words are
+  now stacked in one grid cell and switched with `visibility`, never
+  `display`. The layout-diff harness in the scratchpad checks this.
+- **The wipe does not use the house easing**, and this is deliberate. A wipe
+  is judged by the speed of its *edge*, and `cubic-bezier(.16,1,.3,1)` spends
+  half its duration in its last 3% of travel. That last 3% of radius only
+  lands in the corner furthest from the button, so three corners cleared in
+  138ms and the fourth crept in over the remaining 482ms — it read as the
+  bottom-left corner lagging. It is now near-linear, 480ms, with the radius
+  overshot 6% so the easing's dead tail falls off screen. Edge speed across
+  the four corners went from a 7000x spread to 2.9x.
+
 ## Design rules
 - Palette is exactly: cream `#f6f1e7`, ink `#2a2723`, sage `#41705f`, plus bone `#e6dccb` / `#ece4d6` for media frames and hover fills. Max two background colors per screen. Do not introduce new colors or gradients.
 - Fonts: Anton (display), Space Grotesk (body), JetBrains Mono (labels/meta, always uppercase with wide letter-spacing).
@@ -41,7 +86,7 @@ area on a coarse pointer.
 2. **Loop cards animate on hover only.** Never four clips playing at once.
 3. **Reveal animations fail open.** If IntersectionObserver never fires, content is visible — never ship a section that can stay at `opacity:0`. Verify with the stranded-reveal check, not by eye.
 4. **Scroll work is throttled** (rAF-coalesced or a CSS scroll timeline). No unthrottled per-scroll layout reads.
-5. **Text contrast:** ink on cream, cream on sage. Never cream text on a cream ground; work-index rows are ink by default and sage on hover.
+5. **Text contrast:** ink on cream, cream on sage — in both themes, since those are roles. Never cream text on a cream ground; work-index rows are ink by default and sage on hover.
 6. **Copy is the artist's.** Do not rewrite briefs, about text, or process copy.
 
 ## Known traps from the prototype

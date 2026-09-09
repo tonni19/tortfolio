@@ -30,7 +30,7 @@ export async function generateMetadata(
     title: piece.title,
     description: piece.note || undefined,
     openGraph: {
-      title: `${piece.title} — Tortilla`,
+      title: `${piece.title} · Tortilla`,
       description: piece.note || undefined,
       images: [
         {

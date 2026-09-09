@@ -87,15 +87,24 @@ Images are re-encoded to WebP (long edge 2200px) and videos to H.264/AAC MP4
 PATH** for video compression; without it videos are copied through uncompressed
 and the script warns.
 
+## Day and night
+
+The dial in the nav pill switches the site between its light and dark
+themes. A first-time visitor gets whichever their phone or laptop is set to;
+after that their choice is remembered in the browser. Nothing to configure,
+and no setting to change on deploy.
+
 ## Where things live
 
 ```
 app/            routes — home, /work/[slug], /art/[category]/[slug], /comic/[series]
-components/     UI; ReelLoops (player), Lightbox (zoom viewer), Hero, Marquee…
+components/     UI; ReelLoops (player), Lightbox (zoom viewer), Hero,
+                Marquee, ThemeToggle (day/night)…
 lib/works.ts    the six works in section 02, each pointing at a category
 lib/artworks.ts per-piece titles and notes  ← hand-written
 lib/media.generated.ts  GENERATED — do not edit
 scripts/build-media.mjs the pipeline
+scripts/make-favicon.mjs the site icons, built from the avatar master
 (public/art/legacy/ is no longer used by any page and is excluded from
  the repo; the originals are kept with the media masters)
 CLAUDE.md       design rules and the traps that have already bitten us

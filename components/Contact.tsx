@@ -46,7 +46,7 @@ export default function Contact() {
         className="font-mono mt-[70px] mb-0 text-[10px] opacity-35"
         style={{ letterSpacing: ".18em" }}
       >
-        ©2026 TORTILLA — ALL DRAWINGS MINE
+        ©2026 TORTILLA · ALL DRAWINGS MINE
       </p>
     </section>
   );

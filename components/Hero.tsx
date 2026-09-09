@@ -3,9 +3,6 @@ import Link from "next/link";
 import HeroScroll from "./HeroScroll";
 import { coverOf, HERO_WORKS } from "@/lib/works";
 
-const SCRIM =
-  "linear-gradient(180deg, rgba(23,26,28,.55) 0%, rgba(23,26,28,.05) 40%, rgba(23,26,28,.8) 100%)";
-
 const CAPTION_SHADOW = "0 4px 24px rgba(0,0,0,.6)";
 
 export default function Hero() {
@@ -23,7 +20,7 @@ export default function Hero() {
               key={work.slug}
               href={`/work/${work.slug}`}
               className="hero-panel"
-              aria-label={`${work.title} — ${work.kind}`}
+              aria-label={`${work.title}, ${work.kind}`}
             >
               <Image
                 src={art.src}
@@ -37,7 +34,7 @@ export default function Hero() {
 
               <div
                 className="absolute inset-0"
-                style={{ backgroundImage: SCRIM }}
+                style={{ backgroundImage: "var(--scrim)" }}
               />
 
               <div className="hero-caption absolute right-0 bottom-[26px] left-0 flex flex-col items-center gap-[2px] px-3 text-center">
@@ -58,7 +55,7 @@ export default function Hero() {
                   {work.b}
                 </span>
                 <span
-                  className="hero-caption-kind font-mono mt-[10px] text-[11px] text-cream uppercase opacity-90"
+                  className="hero-caption-kind font-mono mt-[10px] text-[11px] text-on-media uppercase opacity-90"
                   style={{
                     letterSpacing: ".2em",
                     textShadow: "0 2px 10px rgba(0,0,0,.85)",

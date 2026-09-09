@@ -11,7 +11,22 @@
    --------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------- Tokens
-   Design tokens — README "Design tokens". Do not add colours here.        */
+   Design tokens — README "Design tokens". Do not add colours here.
+
+   TWO THEMES, ONE SET OF NAMES. Dark mode is not a second stylesheet: it
+   re-points these same tokens, so nothing downstream branches on the theme.
+   Read the names as roles, not as colours —
+
+     --color-cream  the page, whatever colour the page is
+     --color-ink    the text on the page
+     --color-sage   the accent, used both as a fill and as text
+     --color-bone   the ground behind artwork
+
+   which is why every `bg-cream`, `text-ink` and `bg-sage`/`text-cream`
+   pairing in the app flips on its own. Three tokens deliberately do NOT
+   flip, because they sit on artwork or in the always-dark viewer, where
+   "light" is a fact about the surface and not a theme choice:
+   --color-panel-ink, --color-on-media and --color-accent-fixed.           */
 @theme {
   --color-cream: #f6f1e7;
   --color-ink: #2a2723;
@@ -25,6 +40,10 @@
   --color-bone: #e6dccb;
   --color-bone-hover: #ece4d6;
   --color-panel-ink: #e8e6e0;
+  /* Fixed, theme-independent: text laid over artwork, and the accent used
+     inside the lightbox — both sit on a dark surface in either theme. */
+  --color-on-media: #f6f1e7;
+  --color-accent-fixed: #b0305a;
 
   --font-display: var(--font-anton), Impact, sans-serif;
   --font-body: var(--font-space-grotesk), system-ui, sans-serif;
@@ -34,6 +53,8 @@
 }
 
 :root {
+  color-scheme: light;
+
   --hairline: rgba(42, 39, 35, 0.16);
   --hairline-strong: rgba(42, 39, 35, 0.28);
   --scrim: linear-gradient(
@@ -43,6 +64,90 @@
     rgba(23, 26, 28, 0.8) 100%
   );
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Surfaces that are dark on purpose rather than dark by theme. */
+  --matte: #2a2723;
+  --scrollbar-track: #2a2723;
+
+  /* A small label sitting on top of artwork. */
+  --chip-bg: rgba(246, 241, 231, 0.9);
+  --chip-fg: #2a2723;
+
+  /* Hairlines and shadows drawn ON the accent pill, where the surrounding
+     colour is the accent and not the page. */
+  --pill-line: rgba(246, 241, 231, 0.24);
+  --pill-line-strong: rgba(246, 241, 231, 0.4);
+  --pill-shadow: 0 10px 30px rgba(42, 39, 35, 0.22);
+
+  --lift-shadow: 0 18px 40px rgba(42, 39, 35, 0.18);
+  --sheet-shadow: 0 -30px 80px rgba(0, 0, 0, 0.75);
+
+  /* The full-screen phone menu is an accent panel — dark accent, light type,
+     in both themes. Flipping it with --color-sage would have made it a
+     full-bleed hot pink at night, which is the opposite of a night theme. */
+  --nav-sheet-bg: var(--color-sage);
+
+  --grain-opacity: 0.055;
+  --grain-blend: overlay;
+}
+
+/* ------------------------------------------------------------- Dark theme
+   Unlayered on purpose, like the reduced-motion block at the foot of this
+   file. Tailwind emits @theme into `@layer theme`, and layered CSS loses to
+   unlayered CSS whatever the specificity. This rule sets custom properties
+   and `color-scheme` only, so it cannot collide with a utility — which is
+   the thing the layering note at the top of this file guards against.
+
+   `data-theme` is written by the inline script in app/layout.tsx before
+   first paint, seeded from the system preference; the toggle then stores an
+   explicit choice. There is no `prefers-color-scheme` fallback here on
+   purpose: without JS the toggle would not work either, and a dark page
+   with no way back out of it is worse than a light one.
+
+   The ground is a warm plum-black rather than grey, so it reads as the
+   negative of the cream rather than as a different site, and the accent
+   lifts from Deep Rose to a brighter Rose — Deep Rose is 3.2:1 down here
+   and the eyebrows it colours are 10px.                                   */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-cream: #191216; /* the page */
+  --color-ink: #f3ebe4; /* text on it — 15.6:1 */
+  --color-sage: #ef6f95; /* accent: 6.5:1 as text, 6.5:1 as a fill */
+  --color-sage-light: #5c1230; /* the degree mark, now dark ON the accent */
+  --color-sage-mid: #ff9ab5;
+  --color-bone: #241b21; /* artwork grounds lift off the page, not into it */
+  --color-bone-hover: #2e2229;
+
+  --hairline: rgba(243, 235, 228, 0.14);
+  --hairline-strong: rgba(243, 235, 228, 0.26);
+  --scrim: linear-gradient(
+    180deg,
+    rgba(10, 7, 9, 0.62) 0%,
+    rgba(10, 7, 9, 0.12) 40%,
+    rgba(10, 7, 9, 0.9) 100%
+  );
+
+  --matte: #0f0b0e; /* still darker than the page, so a stage reads as one */
+  --scrollbar-track: #241b21;
+
+  --chip-bg: rgba(15, 11, 14, 0.82);
+  --chip-fg: #f3ebe4;
+
+  --pill-line: rgba(25, 18, 22, 0.3);
+  --pill-line-strong: rgba(25, 18, 22, 0.48);
+  --pill-shadow: 0 10px 34px rgba(0, 0, 0, 0.6);
+
+  --lift-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+  /* The hairline is the second layer: a black shadow on a black hero is
+     invisible, and marking the sheet edge is the whole job of that shadow. */
+  --sheet-shadow:
+    0 -30px 80px rgba(0, 0, 0, 0.85), 0 -1px 0 rgba(243, 235, 228, 0.16);
+
+  --nav-sheet-bg: #2a0f1b; /* deep wine — the accent taken down, not up */
+
+  --grain-opacity: 0.06;
+  --grain-blend: screen; /* overlay is a no-op on a near-black ground */
 }
 
 /* --------------------------------------------------------------- Keyframes */
@@ -145,7 +250,7 @@
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--color-ink);
+    background: var(--scrollbar-track);
   }
   ::-webkit-scrollbar-thumb {
     background: var(--color-sage);
@@ -249,7 +354,7 @@
   .hero-strip:focus-within .hero-panel:focus-visible {
     flex: 2.6 1 0%;
     filter: none;
-    outline: 2px solid var(--color-cream);
+    outline: 2px solid var(--color-on-media);
     outline-offset: -6px;
   }
 
@@ -344,7 +449,7 @@
     z-index: 2;
     background: var(--color-cream);
     border-radius: 26px 26px 0 0;
-    box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.75);
+    box-shadow: var(--sheet-shadow);
     overflow: hidden;
   }
 
@@ -441,8 +546,11 @@
     height: min(62vh, 580px);
     overflow: hidden;
     cursor: pointer;
-    background: var(--color-ink);
-    border: 1px solid var(--color-ink);
+    background: var(--matte);
+    /* A hairline, not the matte colour: on the cream page the stage is its
+       own dark block, but on the dark page it needs an edge to read as a
+       stage at all. Over ink the hairline is invisible either way. */
+    border: 1px solid var(--hairline);
   }
   .reel-stage:focus-visible {
     outline: 2px solid var(--color-sage);
@@ -498,7 +606,7 @@
       box-shadow 0.45s var(--ease);
   }
   .loop-row figure:hover .loop-frame {
-    box-shadow: 0 18px 40px rgba(42, 39, 35, 0.18);
+    box-shadow: var(--lift-shadow);
   }
 
   /* Phones get a grid rather than a sideways rail. The shared-height rule
@@ -567,7 +675,7 @@
   .art-thumb:hover .art-thumb-frame,
   .art-thumb:focus-visible .art-thumb-frame {
     border-color: var(--color-sage);
-    box-shadow: 0 18px 40px rgba(42, 39, 35, 0.18);
+    box-shadow: var(--lift-shadow);
     transform: translateY(-4px);
   }
   .art-thumb img {
@@ -585,8 +693,8 @@
     border-radius: 100px;
     font-size: 8.5px;
     letter-spacing: 0.16em;
-    background: rgba(246, 241, 231, 0.9);
-    color: var(--color-ink);
+    background: var(--chip-bg);
+    color: var(--chip-fg);
   }
 
   .art-thumb-title {
@@ -630,7 +738,7 @@
     border-radius: 100px;
     font-size: 9px;
     background: rgba(42, 39, 35, 0.72);
-    color: var(--color-cream);
+    color: var(--color-on-media);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -648,7 +756,7 @@
     min-height: 40px;
     padding: 0 16px;
     border-radius: 100px;
-    border: 1px solid rgba(246, 241, 231, 0.4);
+    border: 1px solid var(--pill-line-strong);
     background: transparent;
     color: var(--color-cream);
     font-size: 10px;
@@ -665,7 +773,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 96px 28px 40px;
-    background: var(--color-sage);
+    background: var(--nav-sheet-bg);
     animation: nav-sheet-in 0.28s var(--ease) both;
   }
   .nav-sheet[hidden] {
@@ -681,12 +789,12 @@
     align-items: baseline;
     gap: 14px;
     padding: 16px 0;
-    color: var(--color-cream);
+    color: var(--color-on-media);
     border-bottom: 1px solid rgba(246, 241, 231, 0.18);
   }
   .nav-sheet-link:hover,
   .nav-sheet-link:active {
-    color: var(--color-cream);
+    color: var(--color-on-media);
   }
   .nav-sheet-num {
     font-size: 10px;
@@ -765,7 +873,7 @@
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-cream);
+    color: var(--color-on-media);
     opacity: 0.8;
   }
   .lightbox-actions {
@@ -776,7 +884,7 @@
   .lightbox-zoom {
     font-size: 9px;
     letter-spacing: 0.14em;
-    color: var(--color-cream);
+    color: var(--color-on-media);
     opacity: 0.55;
     min-width: 44px;
     text-align: center;
@@ -786,7 +894,7 @@
     border-radius: 100px;
     border: 1px solid rgba(246, 241, 231, 0.28);
     background: transparent;
-    color: var(--color-cream);
+    color: var(--color-on-media);
     font-size: 9.5px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -796,8 +904,8 @@
       border-color 0.25s;
   }
   .lightbox-btn:hover {
-    background: var(--color-sage);
-    border-color: var(--color-sage);
+    background: var(--color-accent-fixed);
+    border-color: var(--color-accent-fixed);
   }
 
   .lightbox-stage {
@@ -834,13 +942,13 @@
     border-radius: 50%;
     border: 1px solid rgba(246, 241, 231, 0.28);
     background: rgba(20, 18, 16, 0.55);
-    color: var(--color-cream);
+    color: var(--color-on-media);
     font-size: 15px;
     cursor: pointer;
     transition: background-color 0.25s;
   }
   .lightbox-nav:hover {
-    background: var(--color-sage);
+    background: var(--color-accent-fixed);
   }
   .lightbox-nav.is-prev {
     left: 16px;
@@ -863,14 +971,14 @@
     max-width: 62ch;
     font-size: 13.5px;
     line-height: 1.6;
-    color: var(--color-cream);
+    color: var(--color-on-media);
     opacity: 0.7;
     text-wrap: pretty;
   }
   .lightbox-count {
     font-size: 9px;
     letter-spacing: 0.18em;
-    color: var(--color-cream);
+    color: var(--color-on-media);
     opacity: 0.45;
   }
 
@@ -916,6 +1024,155 @@
   }
   .next-bar:hover {
     background: var(--color-bone-hover);
+  }
+
+  /* ----------------------------------------------------------------- Grain
+     Blend and strength are theme tokens: `overlay` at .055 is a no-op on a
+     near-black ground, so the dark theme screens the noise on instead.    */
+  .grain {
+    opacity: var(--grain-opacity);
+    mix-blend-mode: var(--grain-blend);
+  }
+
+  /* --------------------------------------------------------- Theme toggle
+     Lives inside the accent pill, so every colour here is expressed against
+     the pill and not against the page: `--color-cream` is the foreground ON
+     the accent in both themes (cream on Deep Rose, plum-black on Rose), and
+     `--color-sage` is the ground it sits on. That is the whole reason the
+     dial can be two flat fills and still read correctly in both.
+
+     The dial is a disc that slides across the track while a second disc of
+     the pill's own colour swings in from the top right and bites a crescent
+     out of it — a sun becoming a moon, drawn rather than iconographic. No
+     JavaScript drives any of this: it is keyed off [data-theme] on <html>,
+     so it is already in the right position at first paint and never snaps
+     into place at hydration.                                              */
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-cream);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    color: var(--color-cream);
+  }
+
+  .theme-toggle-track {
+    position: relative;
+    display: block;
+    flex: none;
+    width: 46px;
+    height: 24px;
+    border-radius: 100px;
+    border: 1px solid color-mix(in srgb, var(--color-cream) 38%, transparent);
+    background: color-mix(in srgb, var(--color-cream) 10%, transparent);
+    transition:
+      background-color 0.35s var(--ease),
+      border-color 0.35s var(--ease);
+  }
+  .theme-toggle:hover .theme-toggle-track,
+  .theme-toggle:focus-visible .theme-toggle-track {
+    background: color-mix(in srgb, var(--color-cream) 22%, transparent);
+    border-color: color-mix(in srgb, var(--color-cream) 62%, transparent);
+  }
+  .theme-toggle:focus-visible {
+    outline: none;
+  }
+  .theme-toggle:focus-visible .theme-toggle-track {
+    outline: 2px solid var(--color-cream);
+    outline-offset: 3px;
+  }
+
+  .theme-toggle-dial {
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background: var(--color-cream);
+    overflow: hidden;
+    transition: transform 0.55s var(--ease);
+  }
+  /* The bite. Parked outside the disc in the day position, swung in far
+     enough to leave a crescent at night. */
+  .theme-toggle-dial::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--color-sage);
+    transform: translate(78%, -78%);
+    transition: transform 0.55s var(--ease);
+  }
+  :root[data-theme="dark"] .theme-toggle-dial {
+    transform: translateX(22px);
+  }
+  :root[data-theme="dark"] .theme-toggle-dial::after {
+    transform: translate(32%, -32%);
+  }
+
+  /* Both words are always rendered, stacked in one grid cell, and CSS shows
+     one of them.
+
+     Rendering both is what makes the label correct at first paint — swapping
+     the word in JS would flash the wrong one. Stacking them is what stops the
+     pill from resizing: NIGHT is 15px wider than DAY, and because the pill is
+     centred, that width landed as a 7.6px sideways jump on every link in the
+     nav each time the theme changed. One cell means the box is always as wide
+     as the longer word, so nothing reflows. `visibility` rather than
+     `display` for the same reason — a hidden word must still take its space,
+     and it stays out of the accessibility tree either way. */
+  .theme-toggle-label {
+    display: grid;
+    grid-template-areas: "word";
+    place-items: center end;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .theme-toggle-label > span {
+    grid-area: word;
+  }
+  .theme-toggle-label [data-when="dark"],
+  :root[data-theme="dark"] .theme-toggle-label [data-when="light"] {
+    visibility: hidden;
+  }
+  :root[data-theme="dark"] .theme-toggle-label [data-when="dark"] {
+    visibility: visible;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .theme-toggle {
+      min-height: 44px;
+    }
+  }
+
+  /* -------------------------------------------------- Theme view transition
+     The flip is a circle of the new theme wiped out from the toggle, which
+     is why both snapshots are pinned still and stacked: the animation is
+     driven from ThemeToggle.tsx as a clip-path on the incoming one. Browsers
+     without the API, and anyone who asked for reduced motion, get the same
+     flip without the wipe.                                                */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  ::view-transition-new(root) {
+    z-index: 2;
   }
 }
 

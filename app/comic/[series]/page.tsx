@@ -26,7 +26,7 @@ export async function generateMetadata(
     title: titleOf(slug, found.name),
     description: detail?.note,
     openGraph: {
-      title: `${titleOf(slug, found.name)} — Tortilla`,
+      title: `${titleOf(slug, found.name)} · Tortilla`,
       description: detail?.note,
       images: [{ url: found.pages[0].src, alt: titleOf(slug, found.name) }],
     },
@@ -93,7 +93,7 @@ export default async function ComicSeries(
           src: page.src,
           width: page.width,
           height: page.height,
-          title: `${title} — page ${i + 1}`,
+          title: `${title}, page ${i + 1}`,
           note: page.note,
           kind: page.kind,
         }))}

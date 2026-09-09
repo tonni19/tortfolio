@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Grain from "@/components/Grain";
 import MuteGuard from "@/components/MuteGuard";
+import { THEME_COLOR, THEME_INIT_SCRIPT } from "@/lib/theme";
 
 const anton = Anton({
   variable: "--font-anton",
@@ -47,8 +48,8 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Tortilla — 2D Digital Artist & Illustrator",
-    template: "%s — Tortilla",
+    default: "Tortilla · 2D Digital Artist & Illustrator",
+    template: "%s · Tortilla",
   },
   description:
     "Character design, asset production, illustration and sequential art by Tortilla, a 2D digital artist in Dhaka. Commissions open.",
@@ -65,24 +66,31 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Tortilla",
-    title: "Tortilla — 2D Digital Artist & Illustrator",
+    title: "Tortilla · 2D Digital Artist & Illustrator",
     description:
-      "Character design, illustration and sequential art. Characters that refuse to sit still.",
+      "Character design, illustration and sequential art. Characters that do not sit still.",
     images: [
       { url: "/art/wallpaper/strike.webp", width: 1800, height: 1800, alt: "Tortilla" },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tortilla — 2D Digital Artist & Illustrator",
+    title: "Tortilla · 2D Digital Artist & Illustrator",
     description: "Character design, illustration and sequential art.",
     images: ["/art/wallpaper/strike.webp"],
   },
 };
 
+/**
+ * Both themes are advertised. A visitor with no stored choice gets the one
+ * their system asks for; ThemeToggle overwrites both tags once they pick.
+ */
 export const viewport: Viewport = {
-  themeColor: "#f6f1e7",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: THEME_COLOR.light },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLOR.dark },
+  ],
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -91,10 +99,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-scroll-behavior="smooth"
       className={`${anton.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
+      /* The theme script writes data-theme onto this element, so what the
+         server rendered and what hydration finds will not match. */
+      suppressHydrationWarning
     >
       {/* Browser extensions (Grammarly and friends) inject attributes onto
           <body> before React hydrates, which reads as a mismatch. */}
       <body suppressHydrationWarning>
+        {/* Blocking, and first, so the theme is settled before anything
+            paints — a deferred script here would flash the wrong one. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <Grain />
         <Nav />
         <MuteGuard />

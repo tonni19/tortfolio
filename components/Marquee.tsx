@@ -170,7 +170,7 @@ export default function Marquee({
       role="button"
       tabIndex={0}
       aria-pressed={paused}
-      aria-label={`${label} — ${paused ? "paused, activate to resume" : "scrolling, activate to pause"}`}
+      aria-label={`${label}, ${paused ? "paused, activate to resume" : "scrolling, activate to pause"}`}
       className={`marquee ${className ?? ""}`}
       style={style}
       onScroll={wrap}

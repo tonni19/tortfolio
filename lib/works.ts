@@ -49,7 +49,7 @@ const WORK_INPUTS: readonly WorkInput[] = [
     kind: "WALLPAPERS",
     category: "wallpaper",
     cover: "wallpaper/strike",
-    meta: "PERSONAL — 2026",
+    meta: "PERSONAL · 2026",
     tools: "CLIP STUDIO",
     brief:
       "Chibi wallpapers for desktop and phone. Minimal black fields with one small character parked in the corner, so icons still have somewhere to live.",
@@ -62,10 +62,10 @@ const WORK_INPUTS: readonly WorkInput[] = [
     kind: "ILLUSTRATION",
     category: "portrait",
     cover: "portrait/smoke",
-    meta: "PERSONAL — 2025",
+    meta: "PERSONAL · 2025",
     tools: "CLIP STUDIO / PROCREATE",
     brief:
-      "Painted portraits — people, animals, and whatever the light is doing behind them.",
+      "Painted portraits. People, animals, and whatever the light is doing behind them.",
   },
   {
     slug: "game-characters",
@@ -75,11 +75,11 @@ const WORK_INPUTS: readonly WorkInput[] = [
     kind: "GAME ART",
     category: "game-characters",
     cover: "game-characters/model-sheet",
-    meta: "GAME JAM — 2026",
+    meta: "GAME JAM · 2026",
     tools: "ASEPRITE / CLIP STUDIO",
     // Drafted from the artist's CV — needs her sign-off before launch.
     brief:
-      "Character work for A Small Journey, a narrative platformer about empathy built in Godot 4 with two developers under game jam conditions. Designs, in-game assets, and the comic-panel sequences that open and close the game — panel layout, line art, colour and hand lettering.",
+      "Character work for A Small Journey, a narrative platformer about empathy built in Godot 4 with two developers under game jam conditions. Designs, in-game assets, and the comic-panel sequences that open and close the game: panel layout, line art, colour and hand lettering.",
   },
   {
     slug: "comic",
@@ -89,10 +89,10 @@ const WORK_INPUTS: readonly WorkInput[] = [
     kind: "COMIC SERIES",
     category: "comic",
     cover: "comic/we-stay-prepared",
-    meta: "SHORT COMIC — 2025",
+    meta: "SHORT COMIC · 2025",
     tools: "CLIP STUDIO",
     brief:
-      "Four pages about a boy who kicks an anthill, gets hit by a car, and wakes up convinced he has become an ant. The ants have their own side of the story.",
+      "Five pages about a boy who kicks an anthill, gets hit by a car, and wakes up convinced he has become an ant. The ants have their own side of the story.",
   },
   {
     slug: "animation",
@@ -102,10 +102,10 @@ const WORK_INPUTS: readonly WorkInput[] = [
     kind: "FRAME BY FRAME",
     category: "animation",
     cover: "animation/sunburst",
-    meta: "PERSONAL — 2026",
+    meta: "PERSONAL · 2026",
     tools: "CALLIPEG / CLIP STUDIO",
     brief:
-      "Hand-drawn animation on twos — short loops and longer scenes, exported as MP4 with the frame sheet and layered file alongside.",
+      "Hand-drawn animation on twos. Short loops and longer scenes, exported as MP4 with the frame sheet and layered file alongside.",
   },
   {
     slug: "custom",
@@ -115,10 +115,10 @@ const WORK_INPUTS: readonly WorkInput[] = [
     kind: "COMMISSIONS",
     category: "custom",
     cover: "custom/car-14-livery",
-    meta: "COMMISSION WORK — OPEN",
+    meta: "COMMISSION WORK · OPEN",
     tools: "CLIP STUDIO / PROCREATE",
     brief:
-      "I take commissions. Character portraits, couple and group pieces, pet portraits, album and poster art, profile pictures, and short animated loops. Send me a reference or just a description and I will send back a sketch before any colour goes down.",
+      "I take commissions. Character portraits, couple and group pieces, pet portraits, album and poster art, profile pictures, and short animated loops. Send me a reference or just a description and I'll send back a sketch before any colour goes down.",
   },
 ];
 
@@ -177,7 +177,7 @@ export const PROCESS_STEPS = [
   {
     num: "01",
     title: "Brief & Scope",
-    body: "Scope, pricing and revision rounds get agreed before anything is drawn, so we both know exactly what is being made.",
+    body: "We agree scope, pricing and revision rounds before anything gets drawn, so we both know what is being made.",
   },
   {
     num: "02",
@@ -187,12 +187,12 @@ export const PROCESS_STEPS = [
   {
     num: "03",
     title: "Line & Colour",
-    body: "Line, flats, then a shading pass — in whatever the brief calls for, whether that is pixel, vector, painted or inked.",
+    body: "Line, flats, then a shading pass, in whatever the brief calls for: pixel, vector, painted or inked.",
   },
   {
     num: "04",
     title: "Deliver",
-    body: "Export-ready finals plus the layered source files, with check-ins at every milestone so nothing arrives as a surprise.",
+    body: "Export-ready finals plus the layered source files, with check-ins at every milestone so nothing lands as a surprise.",
   },
 ] as const;
 

@@ -28,7 +28,7 @@ export async function generateMetadata(
     title: work.title,
     description: work.brief,
     openGraph: {
-      title: `${work.title} — Tortilla`,
+      title: `${work.title} · Tortilla`,
       description: work.brief,
       images: [
         {

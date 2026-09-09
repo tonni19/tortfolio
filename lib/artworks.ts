@@ -39,7 +39,7 @@ const DETAILS: Record<string, Detail> = {
   },
   "animation/late-for-8-am": {
     title: "Late for 8 AM",
-    note: "A short character loop with hand lettering — running, and not going to make it.",
+    note: "A short character loop with hand lettering. Running, and not going to make it.",
   },
 
   // ----------------------------------------------------------------- comic
@@ -70,7 +70,7 @@ const DETAILS: Record<string, Detail> = {
 
   // ---------------------------------------------------------------- custom
   "custom/car-14-livery": {
-    title: "Car 14 — Livery",
+    title: "Car 14 Livery",
     note: "Side and top elevation of a racing livery in teal and lime, numbered 14.",
   },
   "custom/cat-nap": {
@@ -83,7 +83,7 @@ const DETAILS: Record<string, Detail> = {
   },
   "custom/nimbu": {
     title: "Nimbu",
-    note: "Wordmark for Nimbu — a dripping lemon set inside a hypnotic cream and sage swirl.",
+    note: "Wordmark for Nimbu. A dripping lemon set inside a cream and green swirl.",
   },
   "custom/sorting-unit": {
     title: "Sorting Unit",
@@ -97,14 +97,14 @@ const DETAILS: Record<string, Detail> = {
   // -------------------------------------------------------- game characters
   "game-characters/model-sheet": {
     title: "Model Sheet",
-    note: "Character reference on black — full figure, colour swatches and a hand study kept together on one board.",
+    note: "Character reference on black. Full figure, colour swatches and a hand study kept together on one board.",
   },
   "game-characters/lead-front": {
-    title: "Lead — Front",
+    title: "Lead / Front",
     note: "The player character, front view: heavy black hair, olive and purple layers.",
   },
   "game-characters/lead-bust": {
-    title: "Lead — Bust",
+    title: "Lead / Bust",
     note: "The same character framed for dialogue, hair tied up.",
   },
   "game-characters/spearbearer": {
@@ -112,27 +112,27 @@ const DETAILS: Record<string, Detail> = {
     note: "A tall figure with a spear and a patterned wrap skirt, painted full length.",
   },
   "game-characters/bazaar-npc-tank": {
-    title: "Bazaar NPC — Tank",
+    title: "Bazaar NPC / Tank Top",
     note: "Market crowd filler: a boy in a blue tank top, full figure.",
   },
   "game-characters/bazaar-npc-elder": {
-    title: "Bazaar NPC — Elder",
+    title: "Bazaar NPC / Elder",
     note: "Market crowd filler: an older man in a teal shirt.",
   },
   "game-characters/bazaar-npc-cap": {
-    title: "Bazaar NPC — Cap",
+    title: "Bazaar NPC / Cap",
     note: "Market crowd filler: a boy in a topi and olive kurta.",
   },
   "game-characters/bazaar-npc-tank-bust": {
-    title: "Bazaar NPC — Tank, Bust",
+    title: "Bazaar NPC / Tank Top, Bust",
     note: "Dialogue framing for the boy in the blue tank top.",
   },
   "game-characters/bazaar-npc-elder-bust": {
-    title: "Bazaar NPC — Elder, Bust",
+    title: "Bazaar NPC / Elder, Bust",
     note: "Dialogue framing for the older man in teal.",
   },
   "game-characters/bazaar-npc-cap-bust": {
-    title: "Bazaar NPC — Cap, Bust",
+    title: "Bazaar NPC / Cap, Bust",
     note: "Dialogue framing for the boy in the topi.",
   },
   "game-characters/bazaar-boy": {
@@ -152,19 +152,19 @@ const DETAILS: Record<string, Detail> = {
     note: "The big stall: hanging bunches, gourds and melons under a red and white awning.",
   },
   "game-characters/shop-clerk-long-hair": {
-    title: "Shop Clerk — Long Hair",
+    title: "Shop Clerk / Long Hair",
     note: "Supermarket staff in an orange apron, full figure.",
   },
   "game-characters/shop-clerk-bob": {
-    title: "Shop Clerk — Bob",
+    title: "Shop Clerk / Bob",
     note: "A second supermarket clerk, same uniform, different cut.",
   },
   "game-characters/shop-npc-glasses": {
-    title: "Shop NPC — Glasses",
+    title: "Shop NPC / Glasses",
     note: "Supermarket NPC in orange overalls and round glasses.",
   },
   "game-characters/shop-clerk-bust": {
-    title: "Shop Clerk — Bust",
+    title: "Shop Clerk / Bust",
     note: "Dialogue framing for the supermarket clerk.",
   },
   "game-characters/pixel-sprite": {
@@ -173,16 +173,16 @@ const DETAILS: Record<string, Detail> = {
   },
   "game-characters/blade-sprite": {
     title: "Blade Sprite",
-    note: "Seven-frame pixel loop — a hooded figure drawing a blade.",
+    note: "Seven-frame pixel loop of a hooded figure drawing a blade.",
   },
   "game-characters/starstruck": {
     title: "Starstruck",
-    note: "A painted portrait against a starred coral field. Sits with the game folder but is an illustration, not an asset.",
+    note: "A painted portrait against a starred coral field. Filed with the game work, though it is an illustration rather than an asset.",
   },
 
   "custom/brainwave": {
     title: "Brainwave",
-    note: "Cover art for a record that sounded like a pink pool in a green valley — taken literally.",
+    note: "Cover art for a record. It sounded like a pink pool in a green valley, so that is what got drawn.",
   },
   "custom/lemon": {
     title: "Lemon",
@@ -192,7 +192,7 @@ const DETAILS: Record<string, Detail> = {
   // -------------------------------------------------------------- portrait
   "portrait/two-fish": {
     title: "Two Fish",
-    note: "Two fish, two moods — one iridescent, one deep blue — painted for a print run about colour in cold water.",
+    note: "Two fish painted for a print run about colour in cold water, one iridescent and one deep blue.",
   },
   "portrait/smoke": {
     title: "Smoke",
@@ -200,7 +200,7 @@ const DETAILS: Record<string, Detail> = {
   },
   "portrait/cosmos": {
     title: "Cosmos",
-    note: "A face split by colour — half lit in yellow and pink — against a starfield.",
+    note: "A face against a starfield, split down the middle and lit half in yellow, half in pink.",
   },
   "portrait/coco": {
     title: "Coco",
@@ -210,11 +210,11 @@ const DETAILS: Record<string, Detail> = {
   // ------------------------------------------------------------ my avatars
   "my-avatars/trnsprn": {
     title: "Not Just a PFP",
-    note: "Self portrait mid-draw — a giant hand and pencil working on her, the drawing app's toolbar still open around the edges. Cut out, so the page shows through.",
+    note: "Self portrait mid-draw, with a giant hand and pencil working on her and the drawing app's toolbar still open around the edges. Cut out, so the page shows through.",
   },
   "my-avatars/notjustpfp": {
     title: "Not Just a PFP",
-    note: "Self portrait mid-draw — a giant hand and pencil working on her, the drawing app's toolbar still open around the edges.",
+    note: "Self portrait mid-draw, with a giant hand and pencil working on her and the drawing app's toolbar still open around the edges.",
   },
   "my-avatars/pfpwwww": {
     title: "PFP",
@@ -232,15 +232,15 @@ const DETAILS: Record<string, Detail> = {
   },
   "wallpaper/nightie": {
     title: "Nightie",
-    note: "Desktop wallpaper — a small character parked bottom-right on a black field, so icons still have room.",
+    note: "Desktop wallpaper. A small character parked bottom-right on a black field, so icons still have room.",
   },
   "wallpaper/nahin": {
     title: "Nahin",
-    note: "Desktop wallpaper — caped chibi on black, drawn to sit quietly behind a full desktop.",
+    note: "Desktop wallpaper. A caped chibi on black, meant to sit behind a full desktop without competing with it.",
   },
   "wallpaper/dnd": {
     title: "DND",
-    note: "Phone wallpaper — one character, one word, and a lot of black.",
+    note: "Phone wallpaper. One character and one word on a mostly black field.",
   },
 };
 

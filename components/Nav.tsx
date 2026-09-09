@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 import { NAV_ITEMS } from "@/lib/works";
 
 /**
@@ -34,8 +35,8 @@ export default function Nav() {
       <header
         className="fixed top-[14px] left-1/2 z-50 flex -translate-x-1/2 items-center gap-4 rounded-[100px] bg-sage px-3 py-[9px] pl-5 md:gap-[30px]"
         style={{
-          border: "1px solid rgba(246,241,231,.24)",
-          boxShadow: "0 10px 30px rgba(42,39,35,.22)",
+          border: "1px solid var(--pill-line)",
+          boxShadow: "var(--pill-shadow)",
           maxWidth: "calc(100% - 28px)",
         }}
       >
@@ -63,16 +64,23 @@ export default function Nav() {
           ))}
         </nav>
 
-        {/* Phone: one button, no hidden sideways scroll. */}
-        <button
-          type="button"
-          className="nav-toggle font-mono md:hidden"
-          aria-expanded={open}
-          aria-controls="nav-sheet"
-          onClick={() => setOpen((v) => !v)}
+        <span
+          className="flex shrink-0 items-center gap-4 pl-4 md:gap-[22px] md:pl-[26px]"
+          style={{ borderLeft: "1px solid var(--pill-line)" }}
         >
-          {open ? "Close" : "Menu"}
-        </button>
+          <ThemeToggle />
+
+          {/* Phone: one button, no hidden sideways scroll. */}
+          <button
+            type="button"
+            className="nav-toggle font-mono md:hidden"
+            aria-expanded={open}
+            aria-controls="nav-sheet"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </span>
       </header>
 
       <div

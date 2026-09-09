@@ -38,7 +38,7 @@ export default function Home() {
           label="Services"
           className="bg-sage py-3 text-cream"
           itemClassName="font-display text-[46px] tracking-[.02em] uppercase"
-          style={{ borderTop: "2px solid var(--color-ink)" }}
+          style={{ borderTop: "2px solid var(--matte)" }}
         />
 
         <About />
