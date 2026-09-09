@@ -85,8 +85,25 @@ export default function ThemeToggle() {
         document.documentElement.dataset.theme === "dark" ? "light" : "dark";
       const doc = document as ViewTransitionDocument;
 
+      // The wipe is a desktop flourish and is skipped on a phone on purpose.
+      //
+      // Most of what a theme change costs is the full-viewport repaint —
+      // every colour token changes, so everything on screen is repainted —
+      // and both paths pay that. The wipe adds a view transition on top,
+      // which paints the page into two more textures at device pixel ratio.
+      // On a 390x844 DPR-3 profile at 6x CPU throttle, measured light-to-dark
+      // at the reel with a clip playing, that was a mean worst frame of
+      // 106ms against 90ms for flipping straight away.
+      //
+      // The bigger reason is perceptual rather than that 16%: a 480ms
+      // animation gives dropped frames somewhere to show, while the same
+      // hitch on an instant change is a single frame nobody sees. A real
+      // phone GPU is also weaker than an emulated one, so the gap is a floor.
+      // The dial still slides and the crescent still turns, so the tap is not
+      // without feedback.
       if (
         typeof doc.startViewTransition !== "function" ||
+        window.matchMedia("(pointer: coarse)").matches ||
         window.matchMedia("(prefers-reduced-motion: reduce)").matches
       ) {
         apply(next);

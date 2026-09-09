@@ -1033,6 +1033,9 @@
     opacity: var(--grain-opacity);
     mix-blend-mode: var(--grain-blend);
   }
+  /* The grain was suspected of costing frames on phones and measured
+     innocent: with the flip direction held constant it is 68.1ms mean vs
+     69.6ms without it, i.e. nothing. Leave it alone. */
 
   /* --------------------------------------------------------- Theme toggle
      Lives inside the accent pill, so every colour here is expressed against

@@ -58,7 +58,18 @@ touched almost no components.
   `--nav-sheet-bg` (the phone menu — flipping it with the accent made it a
   full-bleed hot pink at night).
 - The flip animates as a circular wipe from the toggle via the View
-  Transitions API. No API, or reduced motion, and it simply changes.
+  Transitions API. **Desktop only.** No API, a coarse pointer, or reduced
+  motion, and it simply changes. Most of what a theme switch costs is the
+  full-viewport repaint that both paths pay; the wipe adds a snapshot on top
+  of it (mean worst frame 106ms vs 90ms on a throttled 390x844 DPR-3
+  profile), and a 480ms animation gives those dropped frames somewhere to
+  show, while the same hitch on an instant change is one invisible frame.
+- **Measure theme-switch performance with the flip direction held constant.**
+  Light-to-dark and dark-to-light do not cost the same, so a harness that
+  just taps the button repeatedly alternates direction and attributes the
+  difference to whatever it was actually testing. That artifact produced a
+  confident, wrong finding that the grain overlay was costing 90ms on phones;
+  held constant, it costs nothing (68.1ms mean with it, 69.6ms without).
 - **Nothing may change size between themes.** The old-and-new snapshots of a
   view transition are overlaid, so any layout difference shows up as text
   ghosting at the wipe edge. The toggle's `DAY`/`NIGHT` label caught this:
